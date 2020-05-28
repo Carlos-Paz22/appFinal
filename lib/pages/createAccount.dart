@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/listUser.dart';
 
 class AddData extends StatefulWidget {
   @override
@@ -13,8 +12,8 @@ class _AddDataState extends State<AddData> {
   TextEditingController controllerTelefono = new TextEditingController();
   TextEditingController controllerDireccion = new TextEditingController();
   TextEditingController controllerCiudad = new TextEditingController();
-
-
+  bool _obscureText = true;
+  
   var _formKey = GlobalKey<FormState>();
 
   void addData() {
@@ -26,18 +25,15 @@ class _AddDataState extends State<AddData> {
       "telefono": controllerTelefono.text,
       "ciudad": controllerCiudad.text,
       "direccion": controllerDireccion.text,
-      //"nivel": _mySelection.toString(), //aqui traemos el DropdownMenuItem lo llamamos _mySelection este es como el controller
-      //"nivel": controllerNivel.text
+   
     });
   }
-  
-  //String _mySelection;
- // List<Map> _myJson = [{"id":0,"name":"ventas"},{"id":1,"name":"admin"}];
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: Colors.lightBlue[900],
         title: new Text("Crear Cuenta"),
       ),
       body: Form(
@@ -61,33 +57,55 @@ class _AddDataState extends State<AddData> {
                     ),
                   ),
                   new ListTile(
-                    leading: const Icon(Icons.vpn_key, color: Colors.blueAccent),
+                    leading: const Icon(Icons.security, color: Colors.lightBlue),
+                    
                     title: new TextFormField(
+                      
                       controller: controllerPassword,
-                       obscureText: true,
+                        obscureText: _obscureText,
+                        
                           validator: (value) {
+                        
                             if (value.isEmpty) return "Ingresa una Contraseña";
                           },
                       decoration: new InputDecoration(
                         hintText: "Contraseña", labelText: "Contraseña",
+                        suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                                child: Icon(
+                                  
+                                  _obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                      color: Colors.lightBlue[800],
+                                ),
+                                
+                              ),
+                        
                       ),
+                      
                     ),
                   ),
                   
                    new ListTile(
-                    leading: const Icon(Icons.location_city, color: Colors.blueAccent),
+                    leading: const Icon(Icons.call, color: Colors.blueAccent),
                     title: new TextFormField(
                       controller: controllerTelefono,
                           validator: (value) {
                             if (value.isEmpty) return "Ingresa un Telefono";
                           },
+                          keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                         hintText: "Telefono", labelText: "Telefono",
                       ),
                     ),
                   ),
                      new ListTile(
-                    leading: const Icon(Icons.phone_android, color: Colors.blueAccent),
+                    leading: const Icon(Icons.location_city, color: Colors.blueAccent),
                     title: new TextFormField(
                       controller: controllerCiudad,
                           validator: (value) {
@@ -99,7 +117,7 @@ class _AddDataState extends State<AddData> {
                     ),
                   ),
                      new ListTile(
-                    leading: const Icon(Icons.call_split, color: Colors.blueAccent),
+                    leading: const Icon(Icons.directions, color: Colors.blueAccent),
                     title: new TextFormField(
                       controller: controllerDireccion,
                           validator: (value) {
@@ -126,8 +144,8 @@ class _AddDataState extends State<AddData> {
                     onPressed: () {
                       if(_formKey.currentState.validate()){
                         addData();
-                       Navigator.pushReplacementNamed(context, '/LoginPage');
-                     //  Navigator.pushReplacementNamed(context, '/powerPage');
+                       Navigator.pushReplacementNamed(context, '/pages/login');
+                    
                   
                       }
                   
@@ -140,14 +158,10 @@ class _AddDataState extends State<AddData> {
                         borderRadius: new BorderRadius.circular(30.0)
                     ),
                     onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/LoginPage');
+                    Navigator.pushReplacementNamed(context, '/pages/login');
                   
                     },
                   ),
-                  /*-------------------------*/
-               
-                       
-              
                 ],
               ),
             ],

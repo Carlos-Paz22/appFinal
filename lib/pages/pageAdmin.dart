@@ -17,11 +17,7 @@ class Admin extends StatelessWidget {
                 builder: (context) {
                   return  AboutWidget(); 
                 }),
-            /*    icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/LoginPage');
-                showAboutDialog(context: context);
-              } */
+           
           ),
         ],
       ),
@@ -36,7 +32,7 @@ class Admin extends StatelessWidget {
               Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new ListUser(),
               ));
-              /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+              
             },
           ),
           Divider(),
@@ -93,7 +89,7 @@ class AboutWidget extends StatelessWidget {
           FlatButton(
              child: Text("Aceptar"),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/LoginPage');
+              Navigator.pushReplacementNamed(context, '/pages/login');
             },
           )
         ],

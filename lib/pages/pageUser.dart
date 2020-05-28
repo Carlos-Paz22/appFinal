@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-/* import 'package:apptienda/pages/detailProduct.dart';
-import 'package:apptienda/pages/listUser.dart'; */
-
 import 'detailUser.dart';
 
 

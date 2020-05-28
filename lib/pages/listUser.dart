@@ -1,13 +1,10 @@
 import 'package:apptienda/pages/createAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-/* import 'package:apptienda/pages/createProduct.dart'; */
 import 'package:apptienda/pages/detailUser.dart';
 import 'dart:async';
 import 'dart:convert';
 
-/* import 'package:apptienda/pages/registroUsuarios.dart'; */
- 
 
 class ListUser extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/listProduct.dart';
+
 
 class AddProduct extends StatefulWidget {
   @override
@@ -42,7 +42,7 @@ class _AddProductState extends State<AddProduct> {
               new Column(
                 children: <Widget>[
                   new ListTile(
-                    leading: const Icon(Icons.rate_review, color: Colors.black),
+                    leading: const Icon(Icons.add_shopping_cart, color: Colors.black),
                     title: new TextFormField(
                       controller: controllerNombre,
                       validator: (value) {
@@ -119,7 +119,7 @@ class _AddProductState extends State<AddProduct> {
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/pageUser');
+                      Navigator.pushReplacementNamed(context, '/pages/listProduct');
                     },
                   ),
                 ],

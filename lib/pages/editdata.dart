@@ -19,6 +19,8 @@ class _EditDataState extends State<EditData> {
   TextEditingController controllerTelefono;
   TextEditingController controllerCiudad;
   TextEditingController controllerDireccion;
+   bool _obscureText = true;
+  
 
 
   void editData() {
@@ -70,13 +72,32 @@ void initState() {
                   ),
                   new ListTile(
                     leading: const Icon(Icons.security, color: Colors.black),
+                   
                     title: new TextFormField(
                       controller: controllerPassword,
+                          obscureText: _obscureText,
                           validator: (value) {
                             if (value.isEmpty) return "Ingresa una Contraseña";
                           },
                       decoration: new InputDecoration(
+                        
                         hintText: "Contraseña", labelText: "Contraseña",
+                          suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                                child: Icon(
+                                  
+                                  _obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                      color: Colors.lightBlue[800],
+                                ),
+                                
+                              ),
+
                       ),
                     ),
                   ),

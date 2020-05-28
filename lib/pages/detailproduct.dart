@@ -3,7 +3,6 @@ import 'package:apptienda/pages/listProduct.dart';
 import './editproduct.dart';
 import 'package:http/http.dart' as http;
 
-
 class Detailproduct extends StatefulWidget {
   List list;
   int index;

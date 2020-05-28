@@ -25,8 +25,6 @@ class _ListProductState extends State<ListProduct> {
       appBar: new AppBar(
         title: new Text("Listado de productos"),
         actions: <Widget>[
-          /*  IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {}), */
-
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () => showDialog(
@@ -35,11 +33,7 @@ class _ListProductState extends State<ListProduct> {
                 builder: (context) {
                   return  AboutWidget(); 
                 }),
-            /*    icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/LoginPage');
-                showAboutDialog(context: context);
-              } */
+       
           ),
         ],
       ),
@@ -145,7 +139,7 @@ class AboutWidget extends StatelessWidget {
           FlatButton(
              child: Text("Aceptar"),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/LoginPage');
+              Navigator.pushReplacementNamed(context, '/pages/login');
             },
           )
         ],
@@ -153,47 +147,3 @@ class AboutWidget extends StatelessWidget {
     );
   }
 } 
-
- 
-
-  /* Widget _muestraAlerta(BuildContext context){
-
-  showDialog(
-    context: context,
-    barrierDismissible:false,
-
-    builder: (context){
-     return AlertDialog(
-       shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.circular(20.0)
-       ),
-       title: Text("Titulo"),
-       content: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         mainAxisSize: MainAxisSize.min,
-         children: <Widget>[
-           Text("Este es el contenido"),
-           FlutterLogo(size: 80.0,)
-         ],
-       ),
-       actions: <Widget>[
-          FlatButton(
-           child: Text("Cancelar"),
-           onPressed: (){
-             Navigator.of(context).pop();
-           },
-         ),
-         FlatButton(
-           child: Text("Guardar"),
-           onPressed: (){
-
-           },
-         ),
-       ],
-     );
-    }
-    );
-
-  }
-
- */
