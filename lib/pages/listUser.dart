@@ -30,10 +30,10 @@ class _ListUserState extends State<ListUser> {
       appBar: new GradientAppBar(
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("Listado Usuarios"),
-        actions: <Widget>[
+       /*  actions: <Widget>[
           IconButton(icon:Icon(Icons.search), onPressed:(){})
 
-        ],
+        ], */
       ),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(

@@ -52,7 +52,7 @@ void initState() {
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         child: Form(       
             child: ListView(
               padding: const EdgeInsets.all(10.0),

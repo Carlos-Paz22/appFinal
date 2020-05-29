@@ -123,7 +123,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.location_on, color: Colors.blueAccent),
+                      leading: const Icon(Icons.location_city, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerCiudad,
                             validator: (value) {
@@ -135,7 +135,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.my_location, color: Colors.blueAccent),
+                      leading: const Icon(Icons.directions, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerDireccion,
                          
