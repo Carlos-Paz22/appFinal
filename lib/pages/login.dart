@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     //
 
     var datauser = json.decode(response.body);
+    
     if (datauser.length == 0) {
       setState(() {
         showDialog(
@@ -61,9 +62,13 @@ class _LoginPageState extends State<LoginPage> {
       });
     } else {
       if (datauser[0]['estado'] == 'admin') {
-        Navigator.pushReplacementNamed(context, '/pageAdmin');
+        /* Navigator.pushReplacementNamed(context, '/pageAdmin');  */
+        Navigator.of(context).pushReplacementNamed('/pageAdmin');
+     
       } else if (datauser[0]['estado'] == 'ventas') {
-        Navigator.pushReplacementNamed(context, '/pages/listProduct');
+        /* Navigator.pushReplacementNamed(context, '/pages/listProduct');  */
+         Navigator.of(context).pushReplacementNamed('/pages/listProduct');
+          
       }
 
       setState(() {

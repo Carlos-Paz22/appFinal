@@ -59,7 +59,7 @@ void initState() {
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         child: Form(       
             child: ListView(
               padding: const EdgeInsets.all(10.0),
@@ -67,7 +67,7 @@ void initState() {
                 new Column(
                   children: <Widget>[
                    new ListTile(
-                      leading: const Icon(Icons.person, color: Colors.black),
+                      leading: const Icon(Icons.person, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerUsername,
                             validator: (value) {
@@ -79,7 +79,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.security, color: Colors.black),
+                      leading: const Icon(Icons.security, color: Colors.blueAccent),
                      
                       title: new TextFormField(
                         controller: controllerPassword,
@@ -110,7 +110,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.call, color: Colors.black),
+                      leading: const Icon(Icons.call, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerTelefono,
                         keyboardType: TextInputType.number,
@@ -123,7 +123,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.location_on, color: Colors.black),
+                      leading: const Icon(Icons.location_on, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerCiudad,
                             validator: (value) {
@@ -135,7 +135,7 @@ void initState() {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.my_location, color: Colors.black),
+                      leading: const Icon(Icons.my_location, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerDireccion,
                          

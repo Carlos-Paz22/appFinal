@@ -65,14 +65,18 @@ void confirm (){
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         child: SingleChildScrollView(
           
                 child: new Container(
      
             /*  height: 900.0,   */
-             padding: const EdgeInsets.all(20.0), 
+             padding: const EdgeInsets.all(10.0), 
             child: new Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0),
+              side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              
+              ),
               child: new Center(
                 child: new Column(
                   children: <Widget>[
@@ -82,24 +86,28 @@ void confirm (){
                     new Text(widget.list[widget.index]['nombre'], style: new TextStyle(fontSize: 20.0),),
                     Divider(
                       color:Colors.black,
+                      height: 30,
                     ),
                      Text("PRECIO DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
                     new Text(widget.list[widget.index]['precio'], style: new TextStyle(fontSize: 20.0),),
                     new Padding(padding: const EdgeInsets.only(top: 30.0),),
                     Divider(
                        color:Colors.black,
+                        height: 30,
                     ),
                      Text("DESCRIPCION DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
                     new Text(widget.list[widget.index]['descripcion'], style: new TextStyle(fontSize: 20.0),),
                     new Padding(padding: const EdgeInsets.only(top: 30.0),),
                     Divider(
                        color:Colors.black,
+                        height: 30,
                     ),
                      Text("CATEGORIA DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
                     new Text(widget.list[widget.index]['categoria'], style: new TextStyle(fontSize: 20.0),),
                     new Padding(padding: const EdgeInsets.only(top: 30.0),),
                      Divider(
                         color:Colors.black,
+                         height: 30,
                      ),
                     new Row(
                       mainAxisSize: MainAxisSize.min,

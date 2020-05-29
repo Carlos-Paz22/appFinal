@@ -51,7 +51,7 @@ class _ListUserState extends State<ListUser> {
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         child: new FutureBuilder<List>(
           future: getData(),
           builder: (context, snapshot) {
@@ -91,15 +91,20 @@ class ItemList extends StatelessWidget {
                           ),
                 ),
             child: new Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0),
+              side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              
+              ),
+                 
               child: new ListTile(
                 title: new Text(
                   list[i]['username'],
                   style: TextStyle(fontSize: 25.0, color: Colors.black),
                 ),
                 leading: new Icon(
-                  Icons.person_pin,
-                  size: 77.0,
-                  color: Colors.red,
+                  Icons.person_outline,
+                  size: 60.0,
+                  color: Colors.blueAccent,
                 ),
                 subtitle: new Text(
                   "Telefono : ${list[i]['telefono']}",

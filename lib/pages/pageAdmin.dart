@@ -2,6 +2,7 @@ import 'package:apptienda/pages/listUser.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+
 class Admin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,47 +17,87 @@ class Admin extends StatelessWidget {
                 barrierDismissible: false,
                 context: context,
                 builder: (context) {
-                  return  AboutWidget(); 
+                  return AboutWidget();
                 }),
-           
           ),
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.grey])),
         child: new Column(
           children: <Widget>[
-            ListTile(
-              title: Text("Registro de Usuarios"),
-              subtitle: Text("Administrar"),
-              leading: Icon(Icons.list),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => new ListUser(),
-                ));
-                
-              },
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(19.0),
+                side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              ),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(19.0),
+                  side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+                ),
+                child: ListTile(
+                  title: Text("Registro de Usuarios"),
+                  subtitle: Text("Administrar"),
+                  leading: Icon(
+                    Icons.supervised_user_circle,
+                    color: Colors.blueAccent,
+                    size: 60.0,
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new ListUser(),
+                    ));
+                  },
+                ),
+              ),
             ),
-            Divider(),
-            Divider(),
-            ListTile(
-              title: Text("Registro de Productos"),
-              subtitle: Text("Administrar"),
-              leading: Icon(Icons.list),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (BuildContext context) => new ListProduct(),
-                ));
-                /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
-              },
+           /*  Divider(
+              color: Colors.black,
+              height: 15,
+            ), */
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(19.0),
+                side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              ),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(19.0),
+                  side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+                ),
+                child: ListTile(
+                  title: Text("Registro de Productos"),
+                  subtitle: Text("Administrar"),
+                  leading: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.blueAccent,
+                    size: 60.0,
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new ListProduct(),
+                    ));
+                    /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+                  },
+                ),
+              ),
             ),
-            Divider(),
+           /*  Divider(
+              color: Colors.black,
+            ), */
           ],
         ),
       ),
@@ -68,18 +109,15 @@ class AboutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       child: AlertDialog(
-        
         backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-         
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text("¿Desea salir de la sesion? "),
-           
             Icon(
               Icons.highlight_off,
               color: Colors.red,
@@ -95,13 +133,14 @@ class AboutWidget extends StatelessWidget {
             },
           ),
           FlatButton(
-             child: Text("Aceptar"),
+            child: Text("Aceptar"),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/pages/login');
+              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
             },
           )
         ],
       ),
     );
   }
-} 
+}

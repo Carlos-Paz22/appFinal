@@ -23,7 +23,7 @@ void deleteData(){
 
 void confirm (){
   AlertDialog alertDialog = new AlertDialog(
-    content: new Text("Esta seguto de eliminar '${widget.list[widget.index]['username']}'"),
+    content: new Text("Esta seguro de eliminar '${widget.list[widget.index]['username']}'"),
     actions: <Widget>[
       new RaisedButton(
         child: new Text(" Eliminar",style: new TextStyle(color: Colors.black),),
@@ -60,11 +60,15 @@ void confirm (){
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           
                   child: new Card(
+                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0),
+              side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              
+              ),
             child: new Center(
               child: new Column(
                 children: <Widget>[
@@ -72,7 +76,10 @@ void confirm (){
                   new Padding(padding: const EdgeInsets.only(top: 30.0),),
                    Text("USUARIO:",style: TextStyle(color:Colors.lightBlue),),
                   new Text(widget.list[widget.index]['username'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(),
+                  Divider(
+                    color: Colors.black,
+                    height: 30,
+                  ),
                  
                   /* new Padding(padding: const EdgeInsets.only(top: 30.0),),
                     Text("PASSWORD:",style: TextStyle(color:Colors.lightBlue),),
@@ -82,16 +89,25 @@ void confirm (){
                   new Padding(padding: const EdgeInsets.only(top: 30.0),),
                     Text("TELEFONO USUARIO:",style: TextStyle(color:Colors.lightBlue),),
                   new Text(widget.list[widget.index]['telefono'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(),
+                  Divider(
+                    color: Colors.black,
+                    height: 30,
+                  ),
                 
                   new Padding(padding: const EdgeInsets.only(top: 30.0),),
                   Text("CIUDAD USUARIO:",style: TextStyle(color:Colors.lightBlue),),
                   new Text(widget.list[widget.index]['ciudad'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(),
+                  Divider(
+                    color: Colors.black,
+                    height: 30,
+                  ),
                   new Padding(padding: const EdgeInsets.only(top: 30.0),),
                   Text("DIRECCION USUARIO:",style: TextStyle(color:Colors.lightBlue),),
                   new Text(widget.list[widget.index]['direccion'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(),
+                  Divider(
+                    color: Colors.black,
+                    height: 30,
+                  ),
                 
 
                   new Row(

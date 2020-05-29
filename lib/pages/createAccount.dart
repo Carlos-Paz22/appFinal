@@ -42,7 +42,7 @@ class _AddDataState extends State<AddData> {
   gradient: LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+    colors: [Colors.white, Colors.grey])),
         child: Form(
           key: _formKey,
           child: Padding(
@@ -64,7 +64,7 @@ class _AddDataState extends State<AddData> {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.security, color: Colors.lightBlue),
+                      leading: const Icon(Icons.security, color: Colors.blueAccent),
                       
                       title: new TextFormField(
                         
@@ -88,7 +88,7 @@ class _AddDataState extends State<AddData> {
                                     _obscureText
                                         ? Icons.visibility
                                         : Icons.visibility_off,
-                                        color: Colors.lightBlue[800],
+                                        color: Colors.blueAccent,
                                   ),
                                   
                                 ),

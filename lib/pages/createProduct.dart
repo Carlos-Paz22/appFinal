@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-
 class AddProduct extends StatefulWidget {
   @override
   _AddProductState createState() => new _AddProductState();
@@ -36,11 +35,11 @@ class _AddProductState extends State<AddProduct> {
         title: new Text("Agregar Producto"),
       ),
       body: Container(
-              decoration: BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.grey])),
         child: Form(
           key: _formKey,
           child: Padding(
@@ -50,7 +49,8 @@ class _AddProductState extends State<AddProduct> {
                 new Column(
                   children: <Widget>[
                     new ListTile(
-                      leading: const Icon(Icons.add_shopping_cart, color: Colors.black),
+                      leading: const Icon(Icons.add_shopping_cart,
+                          color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerNombre,
                         validator: (value) {
@@ -64,13 +64,14 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.monetization_on, color: Colors.black),
+                      leading: const Icon(Icons.monetization_on,
+                          color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerPrecio,
                         validator: (value) {
                           if (value.isEmpty) return "Ingresa un precio";
                         },
-                         keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.number,
                         decoration: new InputDecoration(
                           hintText: "Precio",
                           labelText: "Precio",
@@ -78,7 +79,8 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.description, color: Colors.black),
+                      leading:
+                          const Icon(Icons.description, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerDescripcion,
                         validator: (value) {
@@ -92,7 +94,7 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.category, color: Colors.black),
+                      leading: const Icon(Icons.category, color: Colors.blueAccent),
                       title: new TextFormField(
                         controller: controllerCategoria,
                         validator: (value) {
@@ -128,7 +130,8 @@ class _AddProductState extends State<AddProduct> {
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0)),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/pages/listProduct');
+                        Navigator.pushReplacementNamed(
+                            context, '/pages/listProduct');
                       },
                     ),
                   ],

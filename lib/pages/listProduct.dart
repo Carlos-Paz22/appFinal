@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/createProduct.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-
 import 'dart:async';
 import 'dart:convert';
 
@@ -13,6 +12,7 @@ class ListProduct extends StatefulWidget {
 }
 
 class _ListProductState extends State<ListProduct> {
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<List> getProduct() async {
     final response = await http.get(
       "http://192.168.1.5/tienda/getProduct.php",
@@ -33,9 +33,8 @@ class _ListProductState extends State<ListProduct> {
                 barrierDismissible: false,
                 context: context,
                 builder: (context) {
-                  return  AboutWidget(); 
+                  return AboutWidget();
                 }),
-       
           ),
         ],
       ),
@@ -49,13 +48,12 @@ class _ListProductState extends State<ListProduct> {
         )),
       ),
       body: Container(
-    decoration: BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
-    colors: [Colors.white12, Colors.blueAccent])),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.grey])),
         child: new FutureBuilder<List>(
-          
           future: getProduct(),
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
@@ -93,15 +91,19 @@ class ItemList extends StatelessWidget {
                       )),
             ),
             child: new Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(19.0),
+                side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+              ),
               child: new ListTile(
                 title: new Text(
                   list[i]['nombre'],
                   style: TextStyle(fontSize: 25.0, color: Colors.black),
                 ),
                 leading: new Icon(
-                  Icons.add_shopping_cart,
+                  Icons.shopping_cart,
                   size: 50.0,
-                  color: Colors.green,
+                  color: Colors.blueAccent,
                 ),
                 subtitle: new Text(
                   list[i]['descripcion'],
@@ -120,22 +122,19 @@ class AboutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       child: AlertDialog(
-        
-        backgroundColor: Colors.blueGrey,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        title: Text("Error"),
+        backgroundColor: Colors.white,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Password / User "),
-            Text(" Incorrect"),
+            Text("¿Desea salir de la sesion? "),
             Icon(
-              Icons.error_outline,
+              Icons.highlight_off,
               color: Colors.red,
-              size: 73.0,
+              size: 50.0,
             )
           ],
         ),
@@ -147,13 +146,14 @@ class AboutWidget extends StatelessWidget {
             },
           ),
           FlatButton(
-             child: Text("Aceptar"),
+            child: Text("Aceptar"),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/pages/login');
+              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
             },
           )
         ],
       ),
     );
   }
-} 
+}
