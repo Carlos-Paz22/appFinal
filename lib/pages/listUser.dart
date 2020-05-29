@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/detailUser.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 
 class ListUser extends StatefulWidget {
@@ -15,7 +16,7 @@ class _ListUserState extends State<ListUser> {
 
 
   Future<List> getData() async{
-    final response = await http.get("http://192.168.1.9/tienda/getData.php",);
+    final response = await http.get("http://192.168.1.5/tienda/getData.php",);
     return json.decode(response.body);
 
    
@@ -26,7 +27,8 @@ class _ListUserState extends State<ListUser> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      appBar: new GradientAppBar(
+        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("Listado Usuarios"),
         actions: <Widget>[
           IconButton(icon:Icon(Icons.search), onPressed:(){})
@@ -44,18 +46,25 @@ class _ListUserState extends State<ListUser> {
       ), 
       
 
-      body: new FutureBuilder<List>(
-        future: getData(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
-          return snapshot.hasData
-              ? new ItemList(
-                  list: snapshot.data,
-                )
-              : new Center(
-                  child: new CircularProgressIndicator(),
-                );
-        },
+      body: Container(
+             decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: new FutureBuilder<List>(
+          future: getData(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData
+                ? new ItemList(
+                    list: snapshot.data,
+                  )
+                : new Center(
+                    child: new CircularProgressIndicator(),
+                  );
+          },
+        ),
       ),
     );
   }

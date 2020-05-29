@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/listUser.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class EditData extends StatefulWidget {
   final List list;
@@ -24,7 +25,7 @@ class _EditDataState extends State<EditData> {
 
 
   void editData() {
-    var url="http://192.168.1.9/tienda/editData.php";
+    var url="http://192.168.1.5/tienda/editData.php";
     http.post(url,body: {
       "id": widget.list[widget.index]['id'],
       "username": controllerUsername.text,
@@ -49,116 +50,126 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      appBar: new GradientAppBar(
+        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("EDITAR"),
       ),
-      body: Form(       
-          child: ListView(
-            padding: const EdgeInsets.all(10.0),
-            children: <Widget>[
-              new Column(
-                children: <Widget>[
-                 new ListTile(
-                    leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerUsername,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa un nombre de usurio";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Usuario", labelText: "Usuario",
+      body: Container(
+         decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: Form(       
+            child: ListView(
+              padding: const EdgeInsets.all(10.0),
+              children: <Widget>[
+                new Column(
+                  children: <Widget>[
+                   new ListTile(
+                      leading: const Icon(Icons.person, color: Colors.black),
+                      title: new TextFormField(
+                        controller: controllerUsername,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa un nombre de usurio";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Usuario", labelText: "Usuario",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.security, color: Colors.black),
-                   
-                    title: new TextFormField(
-                      controller: controllerPassword,
-                          obscureText: _obscureText,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una Contraseña";
-                          },
-                      decoration: new InputDecoration(
-                        
-                        hintText: "Contraseña", labelText: "Contraseña",
-                          suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _obscureText = !_obscureText;
-                                  });
-                                },
-                                child: Icon(
+                    new ListTile(
+                      leading: const Icon(Icons.security, color: Colors.black),
+                     
+                      title: new TextFormField(
+                        controller: controllerPassword,
+                            obscureText: _obscureText,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una Contraseña";
+                            },
+                        decoration: new InputDecoration(
+                          
+                          hintText: "Contraseña", labelText: "Contraseña",
+                            suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _obscureText = !_obscureText;
+                                    });
+                                  },
+                                  child: Icon(
+                                    
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                        color: Colors.lightBlue[800],
+                                  ),
                                   
-                                  _obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                      color: Colors.lightBlue[800],
                                 ),
-                                
-                              ),
 
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.call, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerTelefono,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa un Telefono";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Telefono", labelText: "Telefono",
+                    new ListTile(
+                      leading: const Icon(Icons.call, color: Colors.black),
+                      title: new TextFormField(
+                        controller: controllerTelefono,
+                        keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa un Telefono";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Telefono", labelText: "Telefono",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.location_on, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerCiudad,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una Ciudad";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Ciudad", labelText: "Ciudad",
+                    new ListTile(
+                      leading: const Icon(Icons.location_on, color: Colors.black),
+                      title: new TextFormField(
+                        controller: controllerCiudad,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una Ciudad";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Ciudad", labelText: "Ciudad",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.my_location, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerDireccion,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una Direccion";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Direccion", labelText: "Direccion",
+                    new ListTile(
+                      leading: const Icon(Icons.my_location, color: Colors.black),
+                      title: new TextFormField(
+                        controller: controllerDireccion,
+                         
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una Direccion";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Direccion", labelText: "Direccion",
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(
-                    height: 1.0,
-                  ),                 
-                  new Padding(
-                    padding: const EdgeInsets.all(10.0),
-                  ),
-                  new RaisedButton(
-                    child: new Text("Guardar"),
-                    color: Colors.blueAccent,
-                    onPressed: () {
-                      editData();
-                      Navigator.of(context).push(
-                        new MaterialPageRoute(
-                          builder: (BuildContext context)=>new ListUser()
-                        )
-                      );
-                    },
-                  )
-                ],
-              ),
-            ],
-          ),
+                    const Divider(
+                      height: 1.0,
+                    ),                 
+                    new Padding(
+                      padding: const EdgeInsets.all(10.0),
+                    ),
+                    new RaisedButton(
+                      child: new Text("Guardar"),
+                      color: Colors.blueAccent,
+                      onPressed: () {
+                        editData();
+                        Navigator.of(context).push(
+                          new MaterialPageRoute(
+                            builder: (BuildContext context)=>new ListUser()
+                          )
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+        ),
       ),
     );
   }

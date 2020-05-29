@@ -1,12 +1,13 @@
 import 'package:apptienda/pages/listUser.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import 'package:flutter/material.dart';
-
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 class Admin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
+      appBar: new GradientAppBar(
+        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: Text('Pagina Admin'),
         actions: <Widget>[
           IconButton(
@@ -21,36 +22,43 @@ class Admin extends StatelessWidget {
           ),
         ],
       ),
-      body: new Column(
-        children: <Widget>[
-          ListTile(
-            title: Text("Registro de Usuarios"),
-            subtitle: Text("Administrar"),
-            leading: Icon(Icons.list),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                builder: (BuildContext context) => new ListUser(),
-              ));
-              
-            },
-          ),
-          Divider(),
-          Divider(),
-          ListTile(
-            title: Text("Registro de Productos"),
-            subtitle: Text("Administrar"),
-            leading: Icon(Icons.list),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                builder: (BuildContext context) => new ListProduct(),
-              ));
-              /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
-            },
-          ),
-          Divider(),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: new Column(
+          children: <Widget>[
+            ListTile(
+              title: Text("Registro de Usuarios"),
+              subtitle: Text("Administrar"),
+              leading: Icon(Icons.list),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new ListUser(),
+                ));
+                
+              },
+            ),
+            Divider(),
+            Divider(),
+            ListTile(
+              title: Text("Registro de Productos"),
+              subtitle: Text("Administrar"),
+              leading: Icon(Icons.list),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new ListProduct(),
+                ));
+                /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+              },
+            ),
+            Divider(),
+          ],
+        ),
       ),
     );
   }
@@ -63,19 +71,19 @@ class AboutWidget extends StatelessWidget {
       
       child: AlertDialog(
         
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        title: Text("Error"),
+         
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Password / User "),
-            Text(" Incorrect"),
+            Text("¿Desea salir de la sesion? "),
+           
             Icon(
-              Icons.error_outline,
+              Icons.highlight_off,
               color: Colors.red,
-              size: 73.0,
+              size: 50.0,
             )
           ],
         ),

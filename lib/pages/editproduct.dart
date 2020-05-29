@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/listProduct.dart';
-
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 class EditProduct extends StatefulWidget {
   final List list;
   final int index;
@@ -21,7 +21,7 @@ class _EditProductState extends State<EditProduct> {
 
 
   void editProduct() {
-    var url="http://192.168.1.9/tienda/editProduct.php";
+    var url="http://192.168.1.5/tienda/editProduct.php";
     http.post(url,body: {
       "id": widget.list[widget.index]['id'],
       "nombre": controllerNombre.text,
@@ -43,85 +43,94 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      appBar: new GradientAppBar(
+      gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("EDITAR"),
       ),
-      body: Form(       
-          child: ListView(
-            padding: const EdgeInsets.all(10.0),
-            children: <Widget>[
-              new Column(
-                children: <Widget>[
-                 new ListTile(
-                    leading: const Icon(Icons.person, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerNombre,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa un nombre de Producto";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Producto", labelText: "Producto",
+      body: Container(
+           decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: Form(       
+            child: ListView(
+              padding: const EdgeInsets.all(10.0),
+              children: <Widget>[
+                new Column(
+                  children: <Widget>[
+                   new ListTile(
+                      leading: const Icon(Icons.add_shopping_cart, color: Colors.blueAccent),
+                      title: new TextFormField(
+                        controller: controllerNombre,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa un nombre de Producto";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Producto", labelText: "Producto",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.location_on, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerPrecio,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una precio";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Precio", labelText: "precio",
+                    new ListTile(
+                      leading: const Icon(Icons.monetization_on, color: Colors.blueAccent),
+                      title: new TextFormField(
+                        controller: controllerPrecio,
+                        keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una precio";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Precio", labelText: "precio",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.settings_input_component, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerDescripcion,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una descripcion";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Descripcion", labelText: "Descripcion",
+                    new ListTile(
+                      leading: const Icon(Icons.description, color: Colors.blueAccent),
+                      title: new TextFormField(
+                        controller: controllerDescripcion,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una descripcion";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Descripcion", labelText: "Descripcion",
+                        ),
                       ),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.settings_input_component, color: Colors.black),
-                    title: new TextFormField(
-                      controller: controllerCategoria,
-                          validator: (value) {
-                            if (value.isEmpty) return "Ingresa una Categoria";
-                          },
-                      decoration: new InputDecoration(
-                        hintText: "Categoria", labelText: "Categoria",
+                    new ListTile(
+                      leading: const Icon(Icons.category, color: Colors.blueAccent),
+                      title: new TextFormField(
+                        controller: controllerCategoria,
+                            validator: (value) {
+                              if (value.isEmpty) return "Ingresa una Categoria";
+                            },
+                        decoration: new InputDecoration(
+                          hintText: "Categoria", labelText: "Categoria",
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(
-                    height: 1.0,
-                  ),                 
-                  new Padding(
-                    padding: const EdgeInsets.all(10.0),
-                  ),
-                  new RaisedButton(
-                    child: new Text("Guardar"),
-                    color: Colors.blueAccent,
-                    onPressed: () {
-                      editProduct();
-                      Navigator.of(context).push(
-                        new MaterialPageRoute(
-                          builder: (BuildContext context)=>new ListProduct()
-                        )
-                      );
-                    },
-                  )
-                ],
-              ),
-            ],
-          ),
+                    const Divider(
+                      height: 1.0,
+                    ),                 
+                    new Padding(
+                      padding: const EdgeInsets.all(10.0),
+                    ),
+                    new RaisedButton(
+                      child: new Text("Guardar"),
+                      color: Colors.blueAccent,
+                      onPressed: () {
+                        editProduct();
+                        Navigator.of(context).push(
+                          new MaterialPageRoute(
+                            builder: (BuildContext context)=>new ListProduct()
+                          )
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+        ),
       ),
     );
   }

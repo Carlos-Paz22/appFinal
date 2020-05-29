@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import './editproduct.dart';
 import 'package:http/http.dart' as http;
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class Detailproduct extends StatefulWidget {
   List list;
@@ -14,7 +15,7 @@ class Detailproduct extends StatefulWidget {
 class _DetailproductState extends State<Detailproduct> {
 
 void deleteProduct(){
-  var url="http://192.168.1.9/tienda/deleteProduct.php";
+  var url="http://192.168.1.5/tienda/deleteProduct.php";
   http.post(url, body: {
     'id': widget.list[widget.index]['id']
   });
@@ -52,73 +53,92 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("${widget.list[widget.index]['nombre']}")),
-      body: SingleChildScrollView(
-              child: new Container(
-          /* height: 500.0,  */
-          padding: const EdgeInsets.all(20.0),
-          child: new Card(
-            child: new Center(
-              child: new Column(
-                children: <Widget>[
+     
+      appBar: GradientAppBar(title: new Text("${widget.list[widget.index]['nombre']}"),
+      gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
 
-                  new Padding(padding: const EdgeInsets.only(top: 30.0),),
-                  new Text(widget.list[widget.index]['nombre'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(
-                    color:Colors.black,
-                  ),
-                  new Text(widget.list[widget.index]['precio'], style: new TextStyle(fontSize: 20.0),),
-                  new Padding(padding: const EdgeInsets.only(top: 30.0),),
-                  Divider(
-                     color:Colors.black,
-                  ),
-                  new Text(widget.list[widget.index]['descripcion'], style: new TextStyle(fontSize: 20.0),),
-                  new Padding(padding: const EdgeInsets.only(top: 30.0),),
-                  Divider(
-                     color:Colors.black,
-                  ),
-                  new Text(widget.list[widget.index]['categoria'], style: new TextStyle(fontSize: 20.0),),
-                  new Padding(padding: const EdgeInsets.only(top: 30.0),),
-                   Divider(
-                      color:Colors.black,
-                   ),
-                  new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      new RaisedButton(
-                      child: new Text("EDITAR"),                  
-                      color: Colors.blueAccent,
-                      shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(15.0)),
-                      onPressed: ()=>Navigator.of(context).push(
-                          new MaterialPageRoute(
-                            builder: (BuildContext context)=>new EditProduct(list: widget.list, index: widget.index,),
-                          )
-                        ),                    
-                    ),
-                    VerticalDivider(),
-                    new RaisedButton(
-                      child: new Text("ELIMINAR"),                  
-                      color: Colors.redAccent, 
-                      shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(15.0)),
-                      onPressed: ()=>confirm(),                
-                    ),
-                     VerticalDivider(),
-                       new RaisedButton(
-                      child: new Text("Salir"),
-                      color: Colors.yellow,
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(15.0)
-                      ),
-                      onPressed: () {
-                       Navigator.pushReplacementNamed(context, '/pages/listProduct');
+      
+      ),
+      
+      body: Container(
+         decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: SingleChildScrollView(
+          
+                child: new Container(
+     
+            /*  height: 900.0,   */
+             padding: const EdgeInsets.all(20.0), 
+            child: new Card(
+              child: new Center(
+                child: new Column(
+                  children: <Widget>[
                     
-                      },
+                    new Padding(padding: const EdgeInsets.only(top: 30.0),),
+                    Text("NOMBRE DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
+                    new Text(widget.list[widget.index]['nombre'], style: new TextStyle(fontSize: 20.0),),
+                    Divider(
+                      color:Colors.black,
                     ),
-                    ], 
-                  )
-                ],
+                     Text("PRECIO DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
+                    new Text(widget.list[widget.index]['precio'], style: new TextStyle(fontSize: 20.0),),
+                    new Padding(padding: const EdgeInsets.only(top: 30.0),),
+                    Divider(
+                       color:Colors.black,
+                    ),
+                     Text("DESCRIPCION DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
+                    new Text(widget.list[widget.index]['descripcion'], style: new TextStyle(fontSize: 20.0),),
+                    new Padding(padding: const EdgeInsets.only(top: 30.0),),
+                    Divider(
+                       color:Colors.black,
+                    ),
+                     Text("CATEGORIA DEL PRODUCTO:",style: TextStyle(color:Colors.blueAccent),),
+                    new Text(widget.list[widget.index]['categoria'], style: new TextStyle(fontSize: 20.0),),
+                    new Padding(padding: const EdgeInsets.only(top: 30.0),),
+                     Divider(
+                        color:Colors.black,
+                     ),
+                    new Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        new RaisedButton(
+                        child: new Text("EDITAR"),                  
+                        color: Colors.blueAccent,
+                        shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(15.0)),
+                        onPressed: ()=>Navigator.of(context).push(
+                            new MaterialPageRoute(
+                              builder: (BuildContext context)=>new EditProduct(list: widget.list, index: widget.index,),
+                            )
+                          ),                    
+                      ),
+                      VerticalDivider(),
+                      new RaisedButton(
+                        child: new Text("ELIMINAR"),                  
+                        color: Colors.redAccent, 
+                        shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(15.0)),
+                        onPressed: ()=>confirm(),                
+                      ),
+                       VerticalDivider(),
+                         new RaisedButton(
+                        child: new Text("Salir"),
+                        color: Colors.yellow,
+                        shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(15.0)
+                        ),
+                        onPressed: () {
+                         Navigator.pushReplacementNamed(context, '/pages/listProduct');
+                      
+                        },
+                      ),
+                      ], 
+                    )
+                  ],
+                ),
               ),
             ),
           ),

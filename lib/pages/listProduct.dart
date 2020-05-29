@@ -2,6 +2,7 @@ import 'package:apptienda/pages/detailproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/createProduct.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import 'dart:async';
 import 'dart:convert';
@@ -14,7 +15,7 @@ class ListProduct extends StatefulWidget {
 class _ListProductState extends State<ListProduct> {
   Future<List> getProduct() async {
     final response = await http.get(
-      "http://192.168.1.9/tienda/getProduct.php",
+      "http://192.168.1.5/tienda/getProduct.php",
     );
     return json.decode(response.body);
   }
@@ -22,7 +23,8 @@ class _ListProductState extends State<ListProduct> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      appBar: new GradientAppBar(
+        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("Listado de productos"),
         actions: <Widget>[
           IconButton(
@@ -46,18 +48,26 @@ class _ListProductState extends State<ListProduct> {
           builder: (BuildContext context) => new AddProduct(),
         )),
       ),
-      body: new FutureBuilder<List>(
-        future: getProduct(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
-          return snapshot.hasData
-              ? new ItemList(
-                  list: snapshot.data,
-                )
-              : new Center(
-                  child: new CircularProgressIndicator(),
-                );
-        },
+      body: Container(
+    decoration: BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [Colors.white12, Colors.blueAccent])),
+        child: new FutureBuilder<List>(
+          
+          future: getProduct(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData
+                ? new ItemList(
+                    list: snapshot.data,
+                  )
+                : new Center(
+                    child: new CircularProgressIndicator(),
+                  );
+          },
+        ),
       ),
     );
   }
