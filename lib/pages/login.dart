@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   String mensaje = '';
   Future<List> login() async {
     final response =
-        await http.post("http://192.168.1.5/tienda/login.php", body: {
+        await http.post("http://192.168.1.6/tienda/login.php", body: {
       "username": controllerUser.text,
       "password": controllerPass.text,
     });
@@ -63,11 +63,13 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       if (datauser[0]['estado'] == 'admin') {
         /* Navigator.pushReplacementNamed(context, '/pageAdmin');  */
-        Navigator.of(context).pushReplacementNamed('/pageAdmin');
+        /* Navigator.of(context).pushReplacementNamed('/pageAdmin'); */
+        Navigator.of(context).pushNamedAndRemoveUntil('/pageAdmin', (Route<dynamic> route) => false);
      
       } else if (datauser[0]['estado'] == 'ventas') {
         /* Navigator.pushReplacementNamed(context, '/pages/listProduct');  */
-         Navigator.of(context).pushReplacementNamed('/pages/listProduct');
+        /*  Navigator.of(context).pushReplacementNamed('/pages/listProduct'); */
+          Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
           
       }
 

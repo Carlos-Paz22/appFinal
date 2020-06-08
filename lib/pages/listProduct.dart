@@ -1,4 +1,5 @@
 import 'package:apptienda/pages/detailproduct.dart';
+import 'package:apptienda/pages/editproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/createProduct.dart';
@@ -15,7 +16,7 @@ class _ListProductState extends State<ListProduct> {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<List> getProduct() async {
     final response = await http.get(
-      "http://192.168.1.5/tienda/getProduct.php",
+      "http://192.168.1.6/tienda/getProduct.php",
     );
     return json.decode(response.body);
   }
@@ -43,32 +44,61 @@ class _ListProductState extends State<ListProduct> {
           Icons.add,
           color: Colors.black,
         ),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
+        onPressed:(){
+           /* Navigator.of(context).pushNamed('/pages/createProduct'); */
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => AddProduct()),
+            ); 
+           /* Navigator.of(context).pushNamedAndRemoveUntil('/pages/createProduct', (Route<dynamic> route) => false);  */
+        }
+        
+         /* () => Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new AddProduct(),
-        )),
+
+        )),  */
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.white, Colors.grey])),
-        child: new FutureBuilder<List>(
-          future: getProduct(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) print(snapshot.error);
-            return snapshot.hasData
-                ? new ItemList(
-                    list: snapshot.data,
-                  )
-                : new Center(
-                    child: new CircularProgressIndicator(),
-                  );
-          },
+      body: new RefreshIndicator(
+              child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [Colors.white, Colors.grey])),
+          child: new FutureBuilder<List>(
+            future: getProduct(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) print(snapshot.error);
+              return snapshot.hasData
+                  ? new ItemList(
+                      list: snapshot.data,
+                    )
+                  : new Center(
+                      child: new CircularProgressIndicator(),
+                    );
+                    
+            },
+           
+          ),
         ),
-      ),
-    );
-  }
+         onRefresh: _handleRefresh,
+               ),
+             );
+           }
+       Future<Null> _handleRefresh() async {
+    await new Future.delayed(new Duration(seconds: 1));
+
+    setState(() {
+       ListProduct();
+       EditProduct();
+       Detailproduct();
+       AddProduct();
+
+    });
+
+    return null;
+  }    
+         
 }
 
 class ItemList extends StatelessWidget {
@@ -157,3 +187,5 @@ class AboutWidget extends StatelessWidget {
     );
   }
 }
+
+

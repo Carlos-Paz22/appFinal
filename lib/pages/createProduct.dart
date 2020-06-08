@@ -17,7 +17,7 @@ class _AddProductState extends State<AddProduct> {
   var _formKey = GlobalKey<FormState>();
 
   void addProduct() {
-    var url = "http://192.168.1.5/tienda/addProduct.php";
+    var url = "http://192.168.1.6/tienda/addProduct.php";
 
     http.post(url, body: {
       "nombre": controllerNombre.text,
@@ -119,8 +119,15 @@ class _AddProductState extends State<AddProduct> {
                           borderRadius: new BorderRadius.circular(30.0)),
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          addProduct();
-                          Navigator.pop(context);
+                          
+                        addProduct();
+                        
+                         /* Navigator.popAndPushNamed(context, '/pages/listProduct');  */
+                         Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
+                        
+                      /*    Navigator.of(context).pushReplacementNamed('/pages/listProduct'); */
+                        
+                         
                         }
                       },
                     ),
@@ -130,8 +137,7 @@ class _AddProductState extends State<AddProduct> {
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0)),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/pages/listProduct');
+                          Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
                       },
                     ),
                   ],
