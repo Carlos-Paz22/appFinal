@@ -1,22 +1,22 @@
-import 'package:apptienda/pages/detailproduct.dart';
-import 'package:apptienda/pages/editproduct.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/createProduct.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'dart:async';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class ListProduct extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:apptienda/pages/dropdownCategory.dart';
+import 'package:apptienda/pages/createCategory.dart';
+import 'package:apptienda/pages/detailCategory.dart';
+import 'package:apptienda/pages/editCategory.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+
+class LisCatg extends StatefulWidget {
   @override
-  _ListProductState createState() => _ListProductState();
+  _LisCatgState createState() => _LisCatgState();
 }
 
-class _ListProductState extends State<ListProduct> {
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
-  Future<List> getProduct() async {
+class _LisCatgState extends State<LisCatg> {
+  Future<List> getCateg() async {
     final response = await http.get(
-      "http://192.168.1.6/tienda/getProduct.php",
+      "http://192.168.1.6/tienda/getCategory.php",
     );
     return json.decode(response.body);
   }
@@ -25,10 +25,10 @@ class _ListProductState extends State<ListProduct> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new GradientAppBar(
-        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
-        title: new Text("Listado de productos"),
+              gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
+        title: new Text("Listado de Categorias"),
         actions: <Widget>[
-          IconButton(
+           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () => showDialog(
                 barrierDismissible: false,
@@ -48,7 +48,7 @@ class _ListProductState extends State<ListProduct> {
            /* Navigator.of(context).pushNamed('/pages/createProduct'); */
             Navigator.push(
               context, 
-              MaterialPageRoute(builder: (context) => AddProduct()),
+              MaterialPageRoute(builder: (context) => AddCategory()),
             ); 
            /* Navigator.of(context).pushNamedAndRemoveUntil('/pages/createProduct', (Route<dynamic> route) => false);  */
         }
@@ -66,7 +66,7 @@ class _ListProductState extends State<ListProduct> {
                   end: Alignment.bottomLeft,
                   colors: [Colors.white, Colors.grey])),
           child: new FutureBuilder<List>(
-            future: getProduct(),
+            future: getCateg(),
             builder: (context, snapshot) {
               if (snapshot.hasError) print(snapshot.error);
               return snapshot.hasData
@@ -85,20 +85,64 @@ class _ListProductState extends State<ListProduct> {
                ),
              );
            }
+      /* floatingActionButton: new FloatingActionButton.extended(
+        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
+          //Crear categorias con el boron
+          // builder: (BuildContext context) => new AddCatg(),
+          builder: (BuildContext context) => new LandingScreen(),
+        )),
+        icon: new Icon(Icons.add),
+        label: const Text("Agregar categorias"),
+        backgroundColor: Colors.green,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAlias,
+        child: Material(
+            child: SizedBox(
+              width: double.infinity,
+              height: 40.0,
+            ),
+            color: Colors.black),
+      ),
+      body: RefreshIndicator(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.grey])),
+          child: new FutureBuilder<List>(
+            future: getCateg(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) print(snapshot.error);
+              return snapshot.hasData
+                  ? new ItemList(
+                      list: snapshot.data,
+                    )
+                  : new Center(
+                      child: new CircularProgressIndicator(),
+                    );
+            },
+          ),
+        ),
+        onRefresh: _handleRefresh,
+      ),
+    );
+  } */
        Future<Null> _handleRefresh() async {
     await new Future.delayed(new Duration(seconds: 1));
 
     setState(() {
-       ListProduct();
-       EditProduct();
-       Detailproduct();
-       AddProduct();
+       LisCatg();
+      AddCategory();
+      DetailCategory();
+      EditCateg();
 
     });
 
     return null;
-  }    
-         
+  }   
 }
 
 class ItemList extends StatelessWidget {
@@ -113,16 +157,16 @@ class ItemList extends StatelessWidget {
         return new Container(
           padding: const EdgeInsets.all(10.0),
           child: new GestureDetector(
-             
             onTap: () => Navigator.of(context).push(
               new MaterialPageRoute(
-                  builder: (BuildContext context) => new Detailproduct(
-                        list: list,
-                        index: i,
+                  builder: (BuildContext context) => new DetailCategory(
+                        //Detalles de las categorias
+                        listCatg: list,
+                        indexCatg: i,
                       )),
             ),
             child: new Card(
-              shape: RoundedRectangleBorder(
+               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19.0),
                 side: new BorderSide(color: Colors.blueAccent, width: 2.0),
               ),
@@ -132,13 +176,9 @@ class ItemList extends StatelessWidget {
                   style: TextStyle(fontSize: 25.0, color: Colors.black),
                 ),
                 leading: new Icon(
-                  Icons.shopping_cart,
+                  Icons.category,
                   size: 50.0,
                   color: Colors.blueAccent,
-                ),
-                subtitle: new Text(
-                  list[i]['descripcion'],
-                  style: TextStyle(fontSize: 20.0, color: Colors.grey),
                 ),
               ),
             ),
@@ -162,7 +202,7 @@ class AboutWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text("¿Desea salir de la sesion? "),
-            Divider(
+             Divider(
               color: Colors.white,
             ),
             Icon(
@@ -191,5 +231,3 @@ class AboutWidget extends StatelessWidget {
     );
   }
 }
-
-

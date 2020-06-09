@@ -1,16 +1,15 @@
 import 'package:apptienda/pages/listCategory.dart';
-import 'package:apptienda/pages/listUser.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class Admin extends StatelessWidget {
+class ViewProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new GradientAppBar(
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
-        title: Text('Pagina Admin'),
+        title: Text('Vista Productos'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.exit_to_app),
@@ -42,10 +41,10 @@ class Admin extends StatelessWidget {
                   side: new BorderSide(color: Colors.blueAccent, width: 2.0),
                 ),
                 child: ListTile(
-                  title: Text("Registro de Usuarios"),
+                  title: Text("Registro de Categorias"),
                   subtitle: Text("Administrar"),
                   leading: Icon(
-                    Icons.supervised_user_circle,
+                    Icons.category,
                     color: Colors.blueAccent,
                     size: 60.0,
                   ),
@@ -55,7 +54,7 @@ class Admin extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new ListUser(),
+                      builder: (BuildContext context) => new LisCatg(),
                     ));
                   },
                 ),
@@ -90,37 +89,6 @@ class Admin extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new ListProduct(),
-                    ));
-                    /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
-                  },
-                ),
-              ),
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(19.0),
-                side: new BorderSide(color: Colors.blueAccent, width: 2.0),
-              ),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(19.0),
-                  side: new BorderSide(color: Colors.blueAccent, width: 2.0),
-                ),
-                child: ListTile(
-                  title: Text("Registro de Categorias"),
-                  subtitle: Text("Administrar"),
-                  leading: Icon(
-                    Icons.shopping_cart,
-                    color: Colors.blueAccent,
-                    size: 60.0,
-                  ),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new LisCatg(),
                     ));
                     /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
                   },

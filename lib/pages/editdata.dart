@@ -159,7 +159,85 @@ class _EditDataState extends State<EditData> {
                   new Padding(
                     padding: const EdgeInsets.all(10.0),
                   ),
-                  new RaisedButton(
+                  Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                           if (_validation.currentState.validate()) {
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              content: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text("Usuario editado correctamente "),
+                                  Divider(
+                                    color: Colors.white,
+                                  ),
+                                  Icon(
+                                    Icons.done,
+                                    color: Colors.green,
+                                    size: 50.0,
+                                  )
+                                ],
+                              ),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text("Cancelar"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Aceptar"),
+                                  onPressed: () {
+                                    editData();
+
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            '/pages/listUser',
+                                            (Route<dynamic> route) => false);
+                                  },
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        print("Error");
+                      }
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 300.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Guardar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                /*   new RaisedButton(
                     child: new Text("Guardar"),
                     color: Colors.blueAccent,
                     onPressed: () {
@@ -213,7 +291,7 @@ class _EditDataState extends State<EditData> {
                         print("Error");
                       }
                     },
-                  )
+                  ) */
                 ],
               ),
             ],

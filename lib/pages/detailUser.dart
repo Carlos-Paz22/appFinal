@@ -152,7 +152,41 @@ class _DetailState extends State<Detail> {
                   new Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      new RaisedButton(
+                      Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () =>
+                            Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (BuildContext context) => new EditData(
+                            list: widget.list,
+                            index: widget.index,
+                          ),
+                        )),           
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 85.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Editar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                     /*  new RaisedButton(
                         child: new Text("EDITAR"),
                         color: Colors.blueAccent,
                         shape: new RoundedRectangleBorder(
@@ -164,17 +198,77 @@ class _DetailState extends State<Detail> {
                             index: widget.index,
                           ),
                         )),
-                      ),
+                      ), */
                       VerticalDivider(),
-                      new RaisedButton(
+                       Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed:() => confirm(),         
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 85.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Eliminar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    /*   new RaisedButton(
                         child: new Text("ELIMINAR"),
                         color: Colors.redAccent,
                         shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () => confirm(),
-                      ),
+                      ), */
                       VerticalDivider(),
-                      new RaisedButton(
+                      Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed:() {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/pages/listUser',
+                              (Route<dynamic> route) => false);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 85.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Salir",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  /*     new RaisedButton(
                         child: new Text("Salir"),
                         color: Colors.yellow,
                         shape: new RoundedRectangleBorder(
@@ -186,7 +280,7 @@ class _DetailState extends State<Detail> {
                               '/pages/listUser',
                               (Route<dynamic> route) => false);
                         },
-                      ),
+                      ), */
                     ],
                   )
                 ],

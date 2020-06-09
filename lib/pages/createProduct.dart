@@ -23,7 +23,7 @@ class _AddProductState extends State<AddProduct> {
       "nombre": controllerNombre.text,
       "precio": controllerPrecio.text,
       "descripcion": controllerDescripcion.text,
-      "categoria": controllerCategoria.text,
+      "id_catg_producto": controllerCategoria.text,
     });
   }
 
@@ -112,7 +112,96 @@ class _AddProductState extends State<AddProduct> {
                     new Padding(
                       padding: const EdgeInsets.all(10.0),
                     ),
-                    new RaisedButton(
+                     Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                           if (_formKey.currentState.validate()) {
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              content: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text("Producto Guardado correctamente ",textAlign: TextAlign.center,),
+                                  Divider(
+                                    color: Colors.white,
+                                  ),
+                                  Icon(
+                                    Icons.done,
+                                    color: Colors.green,
+                                    size: 50.0,
+                                  )
+                                ],
+                              ),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text("Cancelar"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Aceptar"),
+                                  onPressed: () {
+                                    addProduct();
+                        
+                       
+                         Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
+                        
+                                  
+                                  },
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        print("Error");
+                      }
+                          /* if (_formKey.currentState.validate()) {
+                          
+                        addProduct();
+                        
+                       
+                         Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
+                        
+                      
+                        
+                         
+                        } */
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 300.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Guardar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  /*   new RaisedButton(
                       child: new Text("Guardar"),
                       color: Colors.green,
                       shape: new RoundedRectangleBorder(
@@ -122,16 +211,47 @@ class _AddProductState extends State<AddProduct> {
                           
                         addProduct();
                         
-                         /* Navigator.popAndPushNamed(context, '/pages/listProduct');  */
+                       
                          Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
                         
-                      /*    Navigator.of(context).pushReplacementNamed('/pages/listProduct'); */
+                      
                         
                          
                         }
                       },
+                    ), */
+                    Divider(),
+                    Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                         Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 300.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Salir",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    new RaisedButton(
+                   /*  new RaisedButton(
                       child: new Text("Salir"),
                       color: Colors.red,
                       shape: new RoundedRectangleBorder(
@@ -139,7 +259,7 @@ class _AddProductState extends State<AddProduct> {
                       onPressed: () {
                           Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
                       },
-                    ),
+                    ), */
                   ],
                 ),
               ],

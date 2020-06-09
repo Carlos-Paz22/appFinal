@@ -1,57 +1,44 @@
-import 'package:apptienda/pages/createAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/listProduct.dart';
+import 'package:apptienda/pages/listCategory.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-class EditProduct extends StatefulWidget {
-  final List list;
-  final int index;
+class EditCateg extends StatefulWidget {
+  final List listCatg;
+  final int indexCatg;
 
-  EditProduct({this.index, this.list});
+  EditCateg({this.indexCatg, this.listCatg});
 
   @override
-  _EditProductState createState() => _EditProductState();
+  _EditCategState createState() => _EditCategState();
 }
 
-class _EditProductState extends State<EditProduct> {
-  //para la base
-  var _validation = GlobalKey<FormState>();
-  TextEditingController controllerNombre;
-  TextEditingController controllerPrecio;
-  TextEditingController controllerDescripcion;
-  TextEditingController controllerCategoria;
+class _EditCategState extends State<EditCateg> {
+   final titulo = TextStyle(color: Colors.black, fontSize: 15.0);
+   var _validacion = GlobalKey<FormState>();
+  TextEditingController controllerNombreCateg;
 
-  void editProduct() {
-    var url = "http://192.168.1.6/tienda/editProduct.php";
+  void editCateg() {
+    var url = "http://192.168.1.6/tienda/editCategory.php";
     http.post(url, body: {
-      "id": widget.list[widget.index]['id'],
-      "nombre": controllerNombre.text,
-      "precio": controllerPrecio.text,
-      "descripcion": controllerDescripcion.text,
-      "id_catg_producto": controllerCategoria.text
+      "id": widget.listCatg[widget.indexCatg]['id'],
+      "nombre": controllerNombreCateg.text,
     });
   }
 
   @override
   void initState() {
-    controllerNombre =
-        new TextEditingController(text: widget.list[widget.index]['nombre']);
-    controllerPrecio =
-        new TextEditingController(text: widget.list[widget.index]['precio']);
-    controllerDescripcion = new TextEditingController(
-        text: widget.list[widget.index]['descripcion']);
-    controllerCategoria =
-        new TextEditingController(text: widget.list[widget.index]['id_catg_producto']);
+    controllerNombreCateg = new TextEditingController(
+        text: widget.listCatg[widget.indexCatg]['nombre']);
     super.initState();
   }
 
-  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new GradientAppBar(
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
         title: new Text("EDITAR"),
+        actions: <Widget>[],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -60,67 +47,22 @@ class _EditProductState extends State<EditProduct> {
                 end: Alignment.bottomLeft,
                 colors: [Colors.white, Colors.grey])),
         child: Form(
-          key: _validation,
+          key: _validacion,
           child: ListView(
             padding: const EdgeInsets.all(10.0),
             children: <Widget>[
               new Column(
                 children: <Widget>[
                   new ListTile(
-                    leading: const Icon(Icons.add_shopping_cart,
-                        color: Colors.blueAccent),
+                    leading: const Icon(Icons.rate_review, color: Colors.black),
                     title: new TextFormField(
-                      controller: controllerNombre,
+                      controller: controllerNombreCateg,
                       validator: (value) {
-                        if (value.isEmpty)
-                          return "Ingresa un nombre de Producto";
+                        if (value.isEmpty) return "Ingresa una categoria";
                       },
                       decoration: new InputDecoration(
-                        hintText: "Producto",
-                        labelText: "Producto",
-                      ),
-                    ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.monetization_on,
-                        color: Colors.blueAccent),
-                    title: new TextFormField(
-                      controller: controllerPrecio,
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value.isEmpty) return "Ingresa una precio";
-                      },
-                      decoration: new InputDecoration(
-                        hintText: "Precio",
-                        labelText: "precio",
-                      ),
-                    ),
-                  ),
-                  new ListTile(
-                    leading:
-                        const Icon(Icons.description, color: Colors.blueAccent),
-                    title: new TextFormField(
-                      controller: controllerDescripcion,
-                      validator: (value) {
-                        if (value.isEmpty) return "Ingresa una descripcion";
-                      },
-                      decoration: new InputDecoration(
-                        hintText: "Descripcion",
-                        labelText: "Descripcion",
-                      ),
-                    ),
-                  ),
-                  new ListTile(
-                    leading:
-                        const Icon(Icons.category, color: Colors.blueAccent),
-                    title: new TextFormField(
-                      controller: controllerCategoria,
-                      validator: (value) {
-                        if (value.isEmpty) return "Ingresa una Categoria";
-                      },
-                      decoration: new InputDecoration(
-                        hintText: "Categoria",
-                        labelText: "Categoria",
+                        hintText: "Nombre categoria",
+                        labelText: "Nombre categoria",
                       ),
                     ),
                   ),
@@ -134,8 +76,9 @@ class _EditProductState extends State<EditProduct> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () {
-                           if (_validation.currentState.validate()) {
-                        showDialog(
+                        if(_validacion.currentState.validate()){
+
+                         showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (context) {
@@ -147,7 +90,7 @@ class _EditProductState extends State<EditProduct> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  Text("Producto editado correctamente "),
+                                  Text("Categoria editada correctamente ",textAlign: TextAlign.center,),
                                   Divider(
                                     color: Colors.white,
                                   ),
@@ -167,21 +110,20 @@ class _EditProductState extends State<EditProduct> {
                                 ),
                                 FlatButton(
                                   child: Text("Aceptar"),
-                                  onPressed: () {
-                                    editProduct();
-                                    /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            '/pages/listProduct',
-                                            (Route<dynamic> route) => false);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        print("Error");
+                                      onPressed: () {
+                                        editCateg();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/pages/listCategory', (Route<dynamic> route) => false);
+                                       
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                         /*   */
+                      }else{
+                        print('error al editar producto');
+
                       }
                         },
                         shape: RoundedRectangleBorder(
@@ -208,12 +150,13 @@ class _EditProductState extends State<EditProduct> {
                         ),
                       ),
                     ),
-                  /* new RaisedButton(
+                   /*new RaisedButton(
                     child: new Text("Guardar"),
-                    color: Colors.blueAccent,
+                    color: Colors.greenAccent,
                     onPressed: () {
-                      if (_validation.currentState.validate()) {
-                        showDialog(
+                      if(_validacion.currentState.validate()){
+
+                         showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (context) {
@@ -225,7 +168,7 @@ class _EditProductState extends State<EditProduct> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  Text("Producto editado correctamente "),
+                                  Text("Categoria editada correctamente ",textAlign: TextAlign.center,),
                                   Divider(
                                     color: Colors.white,
                                   ),
@@ -245,22 +188,22 @@ class _EditProductState extends State<EditProduct> {
                                 ),
                                 FlatButton(
                                   child: Text("Aceptar"),
-                                  onPressed: () {
-                                    editProduct();
-                                    /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            '/pages/listProduct',
-                                            (Route<dynamic> route) => false);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        print("Error");
+                                      onPressed: () {
+                                        editCateg();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/pages/listCategory', (Route<dynamic> route) => false);
+                                       
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                         /*   */
+                      }else{
+                        print('error al editar producto');
+
                       }
+                     
                     },
                   ) */
                 ],

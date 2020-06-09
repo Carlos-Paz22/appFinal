@@ -160,6 +160,9 @@ class AboutWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text("¿Desea salir de la sesion? "),
+             Divider(
+              color: Colors.white,
+            ),
             Icon(
               Icons.highlight_off,
               color: Colors.red,

@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+/* import 'package:apptienda/pages/listCategory.dart'; */
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class AddData extends StatefulWidget {
+class AddCategory extends StatefulWidget {
   @override
-  _AddDataState createState() => new _AddDataState();
+  _AddCategoryState createState() => _AddCategoryState();
 }
 
-class _AddDataState extends State<AddData> {
-  TextEditingController controllerUsername = new TextEditingController();
-  TextEditingController controllerPassword = new TextEditingController();
-  TextEditingController controllerTelefono = new TextEditingController();
-  TextEditingController controllerDireccion = new TextEditingController();
-  TextEditingController controllerCiudad = new TextEditingController();
-  bool _obscureText = true;
-
+class _AddCategoryState extends State<AddCategory> {
+  final titulo = TextStyle(color: Colors.black, fontSize: 15.0);
+  TextEditingController controllerCategoria = new TextEditingController();
   var _formKey = GlobalKey<FormState>();
 
-  void addData() {
-    var url = "http://192.168.1.6/tienda/addData.php";
+  void addCategory() {
+    var url = "http://192.168.1.6/tienda/addCategory.php";
 
     http.post(url, body: {
-      "username": controllerUsername.text,
-      "password": controllerPassword.text,
-      "telefono": controllerTelefono.text,
-      "ciudad": controllerCiudad.text,
-      "direccion": controllerDireccion.text,
+      "nombre": controllerCategoria.text,
     });
   }
 
@@ -34,7 +27,8 @@ class _AddDataState extends State<AddData> {
     return new Scaffold(
       appBar: new GradientAppBar(
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
-        title: new Text("Crear Cuenta"),
+        title: new Text("Agregar Categoria"),
+        actions: <Widget>[],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -52,86 +46,15 @@ class _AddDataState extends State<AddData> {
                   children: <Widget>[
                     new ListTile(
                       leading:
-                          const Icon(Icons.person, color: Colors.blueAccent),
+                          const Icon(Icons.category, color: Colors.blueAccent),
                       title: new TextFormField(
-                        controller: controllerUsername,
+                        controller: controllerCategoria,
                         validator: (value) {
-                          if (value.isEmpty)
-                            return "Ingresa un nombre de usuario";
+                          if (value.isEmpty) return "Ingrese una Categoria";
                         },
                         decoration: new InputDecoration(
-                          hintText: "Usuario",
-                          labelText: "Usuario",
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      leading:
-                          const Icon(Icons.security, color: Colors.blueAccent),
-                      title: new TextFormField(
-                        controller: controllerPassword,
-                        obscureText: _obscureText,
-                        validator: (value) {
-                          if (value.isEmpty) return "Ingresa una Contraseña";
-                        },
-                        decoration: new InputDecoration(
-                          hintText: "Contraseña",
-                          labelText: "Contraseña",
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                            child: Icon(
-                              _obscureText
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      leading: const Icon(Icons.call, color: Colors.blueAccent),
-                      title: new TextFormField(
-                        controller: controllerTelefono,
-                        validator: (value) {
-                          if (value.isEmpty) return "Ingresa un Telefono";
-                        },
-                        keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(
-                          hintText: "Telefono",
-                          labelText: "Telefono",
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      leading: const Icon(Icons.location_city,
-                          color: Colors.blueAccent),
-                      title: new TextFormField(
-                        controller: controllerCiudad,
-                        validator: (value) {
-                          if (value.isEmpty) return "Ingresa una Ciudad";
-                        },
-                        decoration: new InputDecoration(
-                          hintText: "Ciudad",
-                          labelText: "Ciudad",
-                        ),
-                      ),
-                    ),
-                    new ListTile(
-                      leading: const Icon(Icons.directions,
-                          color: Colors.blueAccent),
-                      title: new TextFormField(
-                        controller: controllerDireccion,
-                        validator: (value) {
-                          if (value.isEmpty) return "Ingresa una direccion";
-                        },
-                        decoration: new InputDecoration(
-                          hintText: "Direccion",
-                          labelText: "Direccion",
+                          hintText: "Categoria",
+                          labelText: "Categoria",
                         ),
                       ),
                     ),
@@ -145,7 +68,7 @@ class _AddDataState extends State<AddData> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
+                           if (_formKey.currentState.validate()) {
                         showDialog(
                           barrierDismissible: false,
                           context: context,
@@ -158,7 +81,7 @@ class _AddDataState extends State<AddData> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  Text("Usuario creado correctamente ",textAlign: TextAlign.center,),
+                                  Text("Categoria Guardado correctamente ",textAlign: TextAlign.center,),
                                   Divider(
                                     color: Colors.white,
                                   ),
@@ -180,11 +103,11 @@ class _AddDataState extends State<AddData> {
                                   child: Text("Aceptar"),
                                   onPressed: () {
                                    if (_formKey.currentState.validate()) {
-                           addData();
+                            addCategory();
+
                             Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
+                                '/pages/listCategory',
                                 (Route<dynamic> route) => false);
-                            
                           } 
                                   
                                   },
@@ -196,14 +119,17 @@ class _AddDataState extends State<AddData> {
                       } else {
                         print("Error");
                       }
-                         /*  if (_formKey.currentState.validate()) {
-                            addData();
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
-                                (Route<dynamic> route) => false);
-                            
-
-                          } */
+                          /* if (_formKey.currentState.validate()) {
+                          
+                        addProduct();
+                        
+                       
+                         Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false);
+                        
+                      
+                        
+                         
+                        } */
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
@@ -229,35 +155,19 @@ class _AddDataState extends State<AddData> {
                         ),
                       ),
                     ),
-                    /* new RaisedButton(
-                      child: new Text("Guardar"),
-                      color: Colors.blueAccent,
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          addData();
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/pages/login', (Route<dynamic> route) => false);
-                          /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-
-                        }
-                      },
-                    ), */
-                    const Divider(
-                      height: 25.0,
-                    ),
-                    Container(
+                    /* Container(
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () {
-                          
-                         
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
-                                (Route<dynamic> route) => false);
-                            /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+                          if (_formKey.currentState.validate()) {
+                            addCategory();
 
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/pages/listCategory',
+                                (Route<dynamic> route) => false);
+                          } else {
+                            print('Datos erroneso');
+                          }
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
@@ -265,7 +175,7 @@ class _AddDataState extends State<AddData> {
                         child: Ink(
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [Colors.indigo, Colors.pinkAccent],
+                                colors: [Colors.lightBlue, Colors.deepOrange],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomLeft,
                               ),
@@ -275,23 +185,34 @@ class _AddDataState extends State<AddData> {
                                 maxWidth: 300.0, minHeight: 50.0),
                             alignment: Alignment.center,
                             child: Text(
-                              "Salir",
+                              "Guardar",
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  /*   new RaisedButton(
-                      child: new Text("Salir"),
-                      color: Colors.red,
+                    ), */
+                    /*  new RaisedButton(
+                      child: new Text("Guardar"),
+                      color: Colors.lightGreenAccent,
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0)),
                       onPressed: () {
-                        /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/pages/login', (Route<dynamic> route) => false);
+                        if (_formKey.currentState.validate()) {
+              
+                               addCategory();
+                             
+                           Navigator.of(context)
+                                            .pushNamedAndRemoveUntil(
+                                                '/pages/listCategory',
+                                                (Route<dynamic> route) =>
+                                                    false); 
+                                       
+                        
+                        } else {
+                          print('Datos erroneso');
+                        }
                       },
                     ), */
                   ],
