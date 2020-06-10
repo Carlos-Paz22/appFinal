@@ -1,3 +1,4 @@
+import 'package:apptienda/allproduct/ListProduct.dart';
 import 'package:apptienda/pages/listCategory.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class ViewProduct extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new ListProduct(),
+                      builder: (BuildContext context) => new Listado(),
                     ));
                     /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
                   },

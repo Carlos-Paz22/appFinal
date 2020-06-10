@@ -15,7 +15,7 @@ class _AddCategoryState extends State<AddCategory> {
   var _formKey = GlobalKey<FormState>();
 
   void addCategory() {
-    var url = "http://192.168.1.6/tienda/addCategory.php";
+    var url = "http://192.168.1.5/tienda/addCategory.php";
 
     http.post(url, body: {
       "nombre": controllerCategoria.text,

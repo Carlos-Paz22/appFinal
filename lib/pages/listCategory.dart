@@ -16,7 +16,7 @@ class LisCatg extends StatefulWidget {
 class _LisCatgState extends State<LisCatg> {
   Future<List> getCateg() async {
     final response = await http.get(
-      "http://192.168.1.6/tienda/getCategory.php",
+      "http://192.168.1.5/tienda/getCategory.php",
     );
     return json.decode(response.body);
   }

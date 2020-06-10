@@ -1,11 +1,15 @@
-import 'package:apptienda/pages/detailproduct.dart';
 import 'package:apptienda/pages/editproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/createProduct.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:proyecto_tienda/pages/crear_producto.dart';
+/* import 'package:apptienda/pages/detailproduct.dart'; */
+import 'package:apptienda/pages/detailproduct.dart';
 import 'dart:async';
 import 'dart:convert';
+
+
+
 
 class ListProduct extends StatefulWidget {
   @override
@@ -13,58 +17,85 @@ class ListProduct extends StatefulWidget {
 }
 
 class _ListProductState extends State<ListProduct> {
-  var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<List> getProduct() async {
     final response = await http.get(
-      "http://192.168.1.6/tienda/getProduct.php",
+      "http://192.168.1.5/tienda/getProduct.php",
     );
     return json.decode(response.body);
   }
 
+//Refresh
+  Future<Null> refreshList() async {
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+      ListProduct();
+      AddProduct();
+      Detailproduct();
+      EditProduct();
+    });
+    return null;
+  }
+//
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new GradientAppBar(
-        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
-        title: new Text("Listado de productos"),
+      appBar: new AppBar(
+           leading: Builder(
+    builder: (BuildContext context) {
+      return IconButton(
+        icon: const Icon(Icons.keyboard_backspace),
+
+          onPressed: () {
+                Navigator.pushReplacementNamed(context, '/pages/view_product');
+                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
+              },
+        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      );
+    },
+  ),
+        title: new Text("Listado de productos", textAlign: TextAlign.center),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () => showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (context) {
-                  return AboutWidget();
-                }),
-          ),
+              icon: Icon(
+              
+                Icons.keyboard_backspace,
+                size: 40.0,
+                color: Colors.yellowAccent,
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/pages/viewProduct');
+                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
+              })
         ],
       ),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(
           Icons.add,
-          color: Colors.black,
+          color: Colors.redAccent,
         ),
-        onPressed:(){
-           /* Navigator.of(context).pushNamed('/pages/createProduct'); */
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => AddProduct()),
-            ); 
-           /* Navigator.of(context).pushNamedAndRemoveUntil('/pages/createProduct', (Route<dynamic> route) => false);  */
-        }
-        
-         /* () => Navigator.of(context).push(new MaterialPageRoute(
+        backgroundColor: Colors.greenAccent,
+        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new AddProduct(),
-
-        )),  */
+        )),
       ),
-      body: new RefreshIndicator(
-              child: Container(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAlias,
+        child: Material(
+            child: SizedBox(
+              width: double.infinity,
+              height: 50.0,
+            ),
+            color: Colors.black),
+      ),
+      body: RefreshIndicator(//refresh
+        child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.white, Colors.grey])),
+                  colors: [Colors.red, Colors.white])),
           child: new FutureBuilder<List>(
             future: getProduct(),
             builder: (context, snapshot) {
@@ -76,29 +107,13 @@ class _ListProductState extends State<ListProduct> {
                   : new Center(
                       child: new CircularProgressIndicator(),
                     );
-                    
             },
-           
           ),
         ),
-         onRefresh: _handleRefresh,
-               ),
-             );
-           }
-       Future<Null> _handleRefresh() async {
-    await new Future.delayed(new Duration(seconds: 1));
-
-    setState(() {
-       ListProduct();
-       EditProduct();
-       Detailproduct();
-       AddProduct();
-
-    });
-
-    return null;
-  }    
-         
+        onRefresh: refreshList, //Refresh
+      ),
+    );
+  }
 }
 
 class ItemList extends StatelessWidget {
@@ -113,31 +128,27 @@ class ItemList extends StatelessWidget {
         return new Container(
           padding: const EdgeInsets.all(10.0),
           child: new GestureDetector(
-             
             onTap: () => Navigator.of(context).push(
               new MaterialPageRoute(
                   builder: (BuildContext context) => new Detailproduct(
-                        list: list,
-                        index: i,
+                        listPrd: list,
+                        indexProd: i,
                       )),
             ),
             child: new Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(19.0),
-                side: new BorderSide(color: Colors.blueAccent, width: 2.0),
-              ),
               child: new ListTile(
                 title: new Text(
                   list[i]['nombre'],
                   style: TextStyle(fontSize: 25.0, color: Colors.black),
                 ),
                 leading: new Icon(
-                  Icons.shopping_cart,
+                  Icons.add_shopping_cart,
                   size: 50.0,
-                  color: Colors.blueAccent,
+                  color: Colors.green,
                 ),
                 subtitle: new Text(
-                  list[i]['descripcion'],
+                  "Precio →  ${list[i]['precio']}",
+                  /*  list[i]['precio'],  */
                   style: TextStyle(fontSize: 20.0, color: Colors.grey),
                 ),
               ),
@@ -148,48 +159,3 @@ class ItemList extends StatelessWidget {
     );
   }
 }
-
-class AboutWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: AlertDialog(
-        backgroundColor: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("¿Desea salir de la sesion? "),
-            Divider(
-              color: Colors.white,
-            ),
-            Icon(
-              Icons.highlight_off,
-              color: Colors.red,
-              size: 50.0,
-            )
-          ],
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text("Cancelar"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          FlatButton(
-            child: Text("Aceptar"),
-            onPressed: () {
-              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
-            },
-          )
-        ],
-      ),
-    );
-  }
-}
-
-

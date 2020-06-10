@@ -17,7 +17,7 @@ class _ListUserState extends State<ListUser> {
 
 
   Future<List> getData() async{
-    final response = await http.get("http://192.168.1.6/tienda/getData.php",);
+    final response = await http.get("http://192.168.1.5/tienda/getData.php",);
     return json.decode(response.body);
 
    

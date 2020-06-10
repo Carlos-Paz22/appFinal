@@ -24,7 +24,7 @@ class _EditDataState extends State<EditData> {
   bool _obscureText = true;
 
   void editData() {
-    var url = "http://192.168.1.6/tienda/editData.php";
+    var url = "http://192.168.1.5/tienda/editData.php";
     http.post(url, body: {
       "id": widget.list[widget.index]['id'],
       "username": controllerUsername.text,

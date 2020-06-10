@@ -20,7 +20,7 @@ class DetailCategory extends StatefulWidget {
 class _DetailCategoryState extends State<DetailCategory> {
 
   void deleteCatg(){
-  var url="http://192.168.1.6/tienda/deleteCategory.php";
+  var url="http://192.168.1.5/tienda/deleteCategory.php";
   http.post(url, body: {
     'id': widget.listCatg[widget.indexCatg]['id']
   });
