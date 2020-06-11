@@ -1,5 +1,6 @@
 import 'package:apptienda/allproduct/ListProduct.dart';
 import 'package:apptienda/allproduct/detalles.dart';
+import 'package:apptienda/pages/createCategory.dart';
 import 'package:apptienda/pages/listCategory.dart';
 import 'package:apptienda/pages/viewProduct.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class LoginApp extends StatelessWidget {
         '/pages/listUser': (BuildContext context) => new ListUser(),
         '/pages/createAccount': (BuildContext context) => new AddData(),
         '/pages/createProduct': (BuildContext context) => new AddProduct(),
+        '/pages/createCategory': (BuildContext context) => new AddCategory(),
         '/pages/viewProduct': (BuildContext context) => new ViewProduct(),
         '/pages/listCategory': (BuildContext context) => new LisCatg(),
            '/allproduct/ListProduct':(BuildContext context) => new Listado(),

@@ -54,9 +54,10 @@ class ViewProduct extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
+                   /*  Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new LisCatg(),
-                    ));
+                    )); */
+                     Navigator.of(context).pushNamedAndRemoveUntil('/pages/listCategory', (Route<dynamic> route) => false);
                   },
                 ),
               ),

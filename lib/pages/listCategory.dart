@@ -26,6 +26,19 @@ class _LisCatgState extends State<LisCatg> {
     return new Scaffold(
       appBar: new GradientAppBar(
               gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
+                    leading: Builder(
+    builder: (BuildContext context) {
+      return IconButton(
+        icon: const Icon(Icons.keyboard_backspace,color: Colors.white,),
+
+          onPressed: () {
+                Navigator.pushReplacementNamed(context, '/pages/viewProduct');
+                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
+              },
+        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      );
+    },
+  ),
         title: new Text("Listado de Categorias"),
         actions: <Widget>[
            IconButton(

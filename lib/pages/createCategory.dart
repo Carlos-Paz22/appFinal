@@ -13,14 +13,154 @@ class _AddCategoryState extends State<AddCategory> {
   final titulo = TextStyle(color: Colors.black, fontSize: 15.0);
   TextEditingController controllerCategoria = new TextEditingController();
   var _formKey = GlobalKey<FormState>();
+  Future<List> _guardarcat(BuildContext context) async {
+    final regitrarcat =
+        await http.post("http://192.168.1.5/tienda/addCategory.php", body: {
+      "nombre": controllerCategoria.text,
+    });
 
-  void addCategory() {
+    var catregistradas = json.decode(regitrarcat.body);
+
+    if (catregistradas.length != 0) {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Esta categoria ya existe ",
+                  textAlign: TextAlign.center,
+                ),
+                Divider(
+                  color: Colors.white
+                ),
+                Icon(
+                  Icons.warning,
+                  color: Colors.yellow,
+                  size: 50.0,
+                )
+              ],
+            ),
+            actions: <Widget>[
+             
+              FlatButton(
+                child: Text("Aceptar"),
+                onPressed: () {
+                
+                    Navigator.pop(context, '/pages/createCategory');
+                  
+                },
+              )
+            ],
+          );
+        },
+      );
+      /* showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16)
+          ),
+          elevation:0,
+         /*  backgroundColor: Colors.red[200], */
+          title: Text('ERROR'),
+          content: Text('esta categoria ya esta registrada'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'Ok',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300)
+              ),
+              onPressed: (){
+                Navigator.pop(context, 'otracategoriapage');
+              },
+            )
+          ],
+        ),
+      ); */
+    } else {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Categoria creada con exito ",
+                  textAlign: TextAlign.center,
+                ),
+                Divider(
+                  color: Colors.white
+                ),
+                Icon(
+                  Icons.done_outline,
+                  color: Colors.green,
+                  size: 50.0,
+                )
+              ],
+            ),
+            actions: <Widget>[
+             
+              FlatButton(
+                child: Text("Aceptar"),
+                onPressed: () {
+                
+                     Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/pages/listCategory', (Route<dynamic> route) => false);
+                  
+                },
+              )
+            ],
+          );
+        },
+      );
+     /*  showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          elevation: 0,
+          backgroundColor: Colors.green[200],
+          title: Text('Exitoso'),
+          content: Text('esta categoria se registro con exito!'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w300)),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    'menuprincipal', (Route<dynamic> route) => false);
+              },
+            )
+          ],
+        ),
+      ); */
+    }
+  }
+
+  /* void addCategory() {
     var url = "http://192.168.1.5/tienda/addCategory.php";
 
     http.post(url, body: {
       "nombre": controllerCategoria.text,
     });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +208,9 @@ class _AddCategoryState extends State<AddCategory> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () {
-                           if (_formKey.currentState.validate()) {
-                        showDialog(
+                          if (_formKey.currentState.validate()) {
+                            _guardarcat(context);
+                            /* showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (context) {
@@ -103,7 +244,7 @@ class _AddCategoryState extends State<AddCategory> {
                                   child: Text("Aceptar"),
                                   onPressed: () {
                                    if (_formKey.currentState.validate()) {
-                            addCategory();
+                            /* addCategory(); */
 
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/pages/listCategory',
@@ -115,10 +256,10 @@ class _AddCategoryState extends State<AddCategory> {
                               ],
                             );
                           },
-                        );
-                      } else {
-                        print("Error");
-                      }
+                        ); */
+                          } else {
+                            print("Error");
+                          }
                           /* if (_formKey.currentState.validate()) {
                           
                         addProduct();
@@ -148,6 +289,43 @@ class _AddCategoryState extends State<AddCategory> {
                             alignment: Alignment.center,
                             child: Text(
                               "Guardar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                     Container(
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () {
+                          
+                         
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/pages/listCategory',
+                                (Route<dynamic> route) => false);
+                            /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.indigo, Colors.pinkAccent],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomLeft,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                maxWidth: 300.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Salir",
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.white),
                             ),
