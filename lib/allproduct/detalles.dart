@@ -4,7 +4,7 @@ import 'package:apptienda/pages/editproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:apptienda/allproduct/Clase.dart';
-import 'package:apptienda/pages/prueba.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 

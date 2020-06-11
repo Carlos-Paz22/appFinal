@@ -8,7 +8,7 @@ import 'package:apptienda/pages/createProduct.dart';
 import 'package:apptienda/pages/detailproduct.dart';
 import 'package:apptienda/pages/editProduct.dart';
 import 'package:apptienda/pages/listProduct.dart';
-import 'package:apptienda/pages/prueba.dart';
+
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 

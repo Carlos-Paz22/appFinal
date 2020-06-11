@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:apptienda/allproduct/Clase.dart';
 import 'package:apptienda/allproduct/detalles.dart';
-import 'package:apptienda/pages/prueba.dart';
+
 
 class CustomListView extends StatelessWidget {
   final List<Datos> dataproductos;

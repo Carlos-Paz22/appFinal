@@ -102,6 +102,7 @@ void confirm (){
         ],
       ),
       body: Container(
+        height:800,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -111,6 +112,10 @@ void confirm (){
                 child: new Container(
             padding: const EdgeInsets.all(20.0),
             child: new Card(
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(19.0),
+              side: new BorderSide(color: Colors.blueAccent, width: 2.0),
+            ),
               child: new Center(
                 child: new Column(
                   children: <Widget>[
@@ -151,7 +156,9 @@ void confirm (){
                               textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.black),
                             ),
+                            
                           ),
+                          
                         ),
                       ),
                     ),
@@ -167,6 +174,7 @@ void confirm (){
                           ),                    
                       ),  */  
                       VerticalDivider(),
+                      
                       Container(
                       height: 40.0,
                       child: RaisedButton(
@@ -258,8 +266,18 @@ void confirm (){
                       
                         },
                       ), */
+                      Column(
+                        children: <Widget>[
+                          Divider(
+                            height: 80,
+                          ),
+                        ],
+                      )
                       ],
-                    ) 
+                      
+                    ),
+                    
+                  
                   ],
 /* ---------------Botones editar-elimanr salir------------- */
 
@@ -267,12 +285,19 @@ void confirm (){
 
 
                 ),
+                
               ),
+              
             ),
+            
+            
           ),
+        
         ),
+        
       ),
      
     );
+    
   }
 } 
