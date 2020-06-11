@@ -9,6 +9,7 @@ import 'package:apptienda/pages/detailproduct.dart';
 import 'package:apptienda/pages/editProduct.dart';
 import 'package:apptienda/pages/listProduct.dart';
 import 'package:apptienda/pages/prueba.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 
 
@@ -61,11 +62,12 @@ class _ListadoState extends State<Listado> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-        appBar: new AppBar(
+        appBar: new GradientAppBar(
+          gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
                   leading: Builder(
     builder: (BuildContext context) {
       return IconButton(
-        icon: const Icon(Icons.keyboard_backspace,color: Colors.red,),
+        icon: const Icon(Icons.keyboard_backspace,color: Colors.white,),
 
           onPressed: () {
                 Navigator.pushReplacementNamed(context, '/pages/viewProduct');
@@ -77,61 +79,104 @@ class _ListadoState extends State<Listado> {
   ),
         title: new Text("Listado de Productos"),
         actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.home,
-                size: 40.0,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/pages/viewProduct', (Route<dynamic> route) => false);
-              })
+               IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () => showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return AboutWidget();
+                }),
+          ),
         ],
       ),
        floatingActionButton: new FloatingActionButton(
         child: new Icon(
           Icons.add,
-          color: Colors.redAccent,
+          color: Colors.black,
         ),
-        backgroundColor: Colors.greenAccent,
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
+        backgroundColor: Colors.blueAccent,
+        onPressed:(){
+           Navigator.of(context).pushNamedAndRemoveUntil('/pages/createProduct', (Route<dynamic> route) => false);
+        } /* () => Navigator.of(context).push(new MaterialPageRoute(
           builder: (BuildContext context) => new AddProduct(),
-        )),
+          
+        )), */
       ),
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        clipBehavior: Clip.antiAlias,
-        child: Material(
-            child: SizedBox(
-              width: double.infinity,
-              height: 50.0,
+     
+        body: Container(
+           decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Colors.white, Colors.grey])),
+          child: new RefreshIndicator(
+            //FutureBuilder is a widget that builds itself based on the latest snapshot
+            // of interaction with a Future.
+            child: new FutureBuilder<List<Datos>>(
+              future: downloadJSON(),
+              //we pass a BuildContext and an AsyncSnapshot object which is an
+              //Immutable representation of the most recent interaction with
+              //an asynchronous computation.
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Datos> spacecrafts = snapshot.data;
+                  return new CustomListView(spacecrafts);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                //return  a circular progress indicator.
+                return new CircularProgressIndicator();
+              },
             ),
-            color: Colors.black),
-      ),
-        body: new RefreshIndicator(
-          //FutureBuilder is a widget that builds itself based on the latest snapshot
-          // of interaction with a Future.
-          child: new FutureBuilder<List<Datos>>(
-            future: downloadJSON(),
-            //we pass a BuildContext and an AsyncSnapshot object which is an
-            //Immutable representation of the most recent interaction with
-            //an asynchronous computation.
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<Datos> spacecrafts = snapshot.data;
-                return new CustomListView(spacecrafts);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              //return  a circular progress indicator.
-              return new CircularProgressIndicator();
-            },
+             onRefresh: refreshList, //Refresh
           ),
-           onRefresh: refreshList, //Refresh
         ),
         
       
     );
   }
   }
+
+class AboutWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AlertDialog(
+        backgroundColor: Colors.white,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("¿Desea salir de la sesion? "),
+             Divider(
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.highlight_off,
+              color: Colors.red,
+              size: 50.0,
+            )
+          ],
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Cancelar"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text("Aceptar"),
+            onPressed: () {
+              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
+            },
+          )
+        ],
+      ),
+    );
+  }
+}

@@ -88,9 +88,10 @@ class ViewProduct extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
+                   /*  Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new Listado(),
-                    ));
+                    )); */
+                     Navigator.of(context).pushNamedAndRemoveUntil('/allproduct/ListProduct', (Route<dynamic> route) => false);
                     /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
                   },
                 ),

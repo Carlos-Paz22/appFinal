@@ -202,7 +202,6 @@ class _AddDataState extends State<AddData> {
                                 '/pages/login',
                                 (Route<dynamic> route) => false);
                             
-
                           } */
                         },
                         shape: RoundedRectangleBorder(
@@ -240,7 +239,6 @@ class _AddDataState extends State<AddData> {
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               '/pages/login', (Route<dynamic> route) => false);
                           /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-
                         }
                       },
                     ), */
