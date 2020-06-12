@@ -2,14 +2,9 @@ import 'package:apptienda/pages/editproduct.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:apptienda/pages/createProduct.dart';
-//import 'package:proyecto_tienda/pages/crear_producto.dart';
-/* import 'package:apptienda/pages/detailproduct.dart'; */
 import 'package:apptienda/pages/detailproduct.dart';
 import 'dart:async';
 import 'dart:convert';
-
-
-
 
 class ListProduct extends StatefulWidget {
   @override
@@ -24,7 +19,6 @@ class _ListProductState extends State<ListProduct> {
     return json.decode(response.body);
   }
 
-//Refresh
   Future<Null> refreshList() async {
     await Future.delayed(Duration(seconds: 2));
 
@@ -36,7 +30,6 @@ class _ListProductState extends State<ListProduct> {
     });
     return null;
   }
-//
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -48,7 +41,7 @@ class _ListProductState extends State<ListProduct> {
 
           onPressed: () {
                 Navigator.pushReplacementNamed(context, '/pages/view_product');
-                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
+            
               },
         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
       );
@@ -65,7 +58,7 @@ class _ListProductState extends State<ListProduct> {
               ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/pages/viewProduct');
-                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
+                
               })
         ],
       ),
@@ -89,7 +82,7 @@ class _ListProductState extends State<ListProduct> {
             ),
             color: Colors.black),
       ),
-      body: RefreshIndicator(//refresh
+      body: RefreshIndicator(
         child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(

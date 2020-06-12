@@ -146,63 +146,61 @@ class _AddDataState extends State<AddData> {
                       child: RaisedButton(
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                        showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text("Usuario creado correctamente ",textAlign: TextAlign.center,),
-                                  Divider(
-                                    color: Colors.white,
+                            showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  content: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      Text(
+                                        "Usuario creado correctamente ",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        color: Colors.white,
+                                      ),
+                                      Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                        size: 50.0,
+                                      )
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                    size: 50.0,
-                                  )
-                                ],
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Aceptar"),
-                                  onPressed: () {
-                                   if (_formKey.currentState.validate()) {
-                           addData();
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
-                                (Route<dynamic> route) => false);
-                            
-                          } 
-                                  
-                                  },
-                                )
-                              ],
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Cancelar"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Aceptar"),
+                                      onPressed: () {
+                                        if (_formKey.currentState.validate()) {
+                                          addData();
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  '/pages/login',
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                        }
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
                             );
-                          },
-                        );
-                      } else {
-                        print("Error");
-                      }
-                         /*  if (_formKey.currentState.validate()) {
-                            addData();
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
-                                (Route<dynamic> route) => false);
-                            
-                          } */
+                          } else {
+                            print("Error");
+                          }
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
@@ -210,7 +208,7 @@ class _AddDataState extends State<AddData> {
                         child: Ink(
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
+                                colors: [Colors.cyan, Colors.indigo],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomLeft,
                               ),
@@ -228,20 +226,6 @@ class _AddDataState extends State<AddData> {
                         ),
                       ),
                     ),
-                    /* new RaisedButton(
-                      child: new Text("Guardar"),
-                      color: Colors.blueAccent,
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          addData();
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/pages/login', (Route<dynamic> route) => false);
-                          /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                        }
-                      },
-                    ), */
                     const Divider(
                       height: 25.0,
                     ),
@@ -249,13 +233,8 @@ class _AddDataState extends State<AddData> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () {
-                          
-                         
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/pages/login',
-                                (Route<dynamic> route) => false);
-                            /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/pages/login', (Route<dynamic> route) => false);
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
@@ -263,7 +242,7 @@ class _AddDataState extends State<AddData> {
                         child: Ink(
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [Colors.indigo, Colors.pinkAccent],
+                                colors: [Colors.indigo, Colors.cyan],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomLeft,
                               ),
@@ -281,17 +260,6 @@ class _AddDataState extends State<AddData> {
                         ),
                       ),
                     ),
-                  /*   new RaisedButton(
-                      child: new Text("Salir"),
-                      color: Colors.red,
-                      shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0)),
-                      onPressed: () {
-                        /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/pages/login', (Route<dynamic> route) => false);
-                      },
-                    ), */
                   ],
                 ),
               ],

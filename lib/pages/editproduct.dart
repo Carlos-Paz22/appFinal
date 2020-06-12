@@ -1,7 +1,5 @@
-import 'package:apptienda/pages/createAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/listProduct.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class EditProduct extends StatefulWidget {
@@ -41,8 +39,8 @@ class _EditProductState extends State<EditProduct> {
         new TextEditingController(text: widget.list[widget.index]['precio']);
     controllerDescripcion = new TextEditingController(
         text: widget.list[widget.index]['descripcion']);
-    controllerCategoria =
-        new TextEditingController(text: widget.list[widget.index]['id_catg_producto']);
+    controllerCategoria = new TextEditingController(
+        text: widget.list[widget.index]['id_catg_producto']);
     super.initState();
   }
 
@@ -131,138 +129,83 @@ class _EditProductState extends State<EditProduct> {
                     padding: const EdgeInsets.all(10.0),
                   ),
                   Container(
-                      height: 40.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                           if (_validation.currentState.validate()) {
-                        showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text("Producto editado correctamente "),
-                                  Divider(
-                                    color: Colors.white,
+                    height: 40.0,
+                    child: RaisedButton(
+                      onPressed: () {
+                        if (_validation.currentState.validate()) {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                content: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Text("Producto editado correctamente "),
+                                    Divider(
+                                      color: Colors.white,
+                                    ),
+                                    Icon(
+                                      Icons.done,
+                                      color: Colors.green,
+                                      size: 50.0,
+                                    )
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text("Cancelar"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                    size: 50.0,
+                                  FlatButton(
+                                    child: Text("Aceptar"),
+                                    onPressed: () {
+                                      editProduct();
+
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil(
+                                              '/pages/listProduct',
+                                              (Route<dynamic> route) => false);
+                                    },
                                   )
                                 ],
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Aceptar"),
-                                  onPressed: () {
-                                    editProduct();
-                                    /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            '/pages/listProduct',
-                                            (Route<dynamic> route) => false);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        print("Error");
-                      }
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomLeft,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 300.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Guardar",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+                              );
+                            },
+                          );
+                        } else {
+                          print("Error");
+                        }
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80.0)),
+                      padding: EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.lightBlue, Colors.deepOrange],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomLeft,
                             ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Guardar",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
                     ),
-                  /* new RaisedButton(
-                    child: new Text("Guardar"),
-                    color: Colors.blueAccent,
-                    onPressed: () {
-                      if (_validation.currentState.validate()) {
-                        showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text("Producto editado correctamente "),
-                                  Divider(
-                                    color: Colors.white,
-                                  ),
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                    size: 50.0,
-                                  )
-                                ],
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Aceptar"),
-                                  onPressed: () {
-                                    editProduct();
-                                    /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            '/pages/listProduct',
-                                            (Route<dynamic> route) => false);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        print("Error");
-                      }
-                    },
-                  ) */
+                  ),
                 ],
               ),
             ],

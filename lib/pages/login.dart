@@ -1,10 +1,8 @@
 import 'package:apptienda/pages/createAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 import 'dart:async';
-
 import '../main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -66,14 +64,11 @@ class _LoginPageState extends State<LoginPage> {
       });
     } else {
       if (datauser[0]['estado'] == 'admin') {
-        /* Navigator.pushReplacementNamed(context, '/pageAdmin');  */
-        /* Navigator.of(context).pushReplacementNamed('/pageAdmin'); */
+       
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/pageAdmin', (Route<dynamic> route) => false);
       } else if (datauser[0]['estado'] == 'ventas') {
-        /* Navigator.pushReplacementNamed(context, '/pages/listProduct');  */
-        /*  Navigator.of(context).pushReplacementNamed('/pages/listProduct'); */
-        /*  Navigator.of(context).pushNamedAndRemoveUntil('/pages/listProduct', (Route<dynamic> route) => false); */
+      
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/pages/viewProduct', (Route<dynamic> route) => false);
       }
@@ -91,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
       onWillPop: () async => false,
       child: new Scaffold(
         resizeToAvoidBottomPadding: false,
-        // appBar: AppBar(title: Text("Login"),),
+       
         body: Container(
           child: Container(
             decoration: new BoxDecoration(
@@ -139,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'User'),
                         ),
                       ),
-                      //Password
+                      
                       Container(
                         width: MediaQuery.of(context).size.width / 1.2,
                         height: 50,
@@ -210,20 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      /*  new MaterialButton(
-                        minWidth: 150,
-                        child: new Text(
-                          'Ingresar',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        color: Colors.lightBlue,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0)),
-                        onPressed: () {
-                          login();
-                          //   Navigator.pop(context);
-                        },
-                      ), */
+                    
                       Spacer(),
                       Container(
                         height: 40.0,
@@ -232,8 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).push(new MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     new AddData()));
-                            /* Navigator.pushReplacementNamed(
-                                context, '/pages/createAccount'); */
+                 
                           },
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(80.0)),
@@ -259,19 +240,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-
-                      /*    new MaterialButton(
-                        
-                        minWidth: 150,
-                        child: new Text('Crear cuenta'),
-                        color: Colors.purpleAccent[400],
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0)),
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, '/pages/createAccount');
-                        },
-                      ), */
                       Text(
                         mensaje,
                         style: TextStyle(fontSize: 1, color: Colors.red),

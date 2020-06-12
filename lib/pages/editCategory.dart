@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:apptienda/pages/listCategory.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class EditCateg extends StatefulWidget {
@@ -14,8 +13,8 @@ class EditCateg extends StatefulWidget {
 }
 
 class _EditCategState extends State<EditCateg> {
-   final titulo = TextStyle(color: Colors.black, fontSize: 15.0);
-   var _validacion = GlobalKey<FormState>();
+  final titulo = TextStyle(color: Colors.black, fontSize: 15.0);
+  var _validacion = GlobalKey<FormState>();
   TextEditingController controllerNombreCateg;
 
   void editCateg() {
@@ -73,139 +72,87 @@ class _EditCategState extends State<EditCateg> {
                     padding: const EdgeInsets.all(10.0),
                   ),
                   Container(
-                      height: 40.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                        if(_validacion.currentState.validate()){
-
-                         showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text("Categoria editada correctamente ",textAlign: TextAlign.center,),
-                                  Divider(
-                                    color: Colors.white,
+                    height: 40.0,
+                    child: RaisedButton(
+                      onPressed: () {
+                        if (_validacion.currentState.validate()) {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  content: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      Text(
+                                        "Categoria editada correctamente ",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Divider(
+                                        color: Colors.white,
+                                      ),
+                                      Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                        size: 50.0,
+                                      )
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                    size: 50.0,
-                                  )
-                                ],
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Aceptar"),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Cancelar"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Aceptar"),
                                       onPressed: () {
                                         editCateg();
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/pages/listCategory', (Route<dynamic> route) => false);
-                                       
+                                        Navigator.of(context)
+                                            .pushNamedAndRemoveUntil(
+                                                '/pages/listCategory',
+                                                (Route<dynamic> route) =>
+                                                    false);
                                       },
                                     ),
                                   ],
                                 );
                               });
-                         /*   */
-                      }else{
-                        print('error al editar producto');
-
-                      }
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomLeft,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 300.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Guardar",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+                        } else {
+                          print('error al editar producto');
+                        }
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80.0)),
+                      padding: EdgeInsets.all(0.0),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.cyan, Colors.indigo],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomLeft,
                             ),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Container(
+                          constraints:
+                              BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Guardar",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
                     ),
-                   /*new RaisedButton(
-                    child: new Text("Guardar"),
-                    color: Colors.greenAccent,
-                    onPressed: () {
-                      if(_validacion.currentState.validate()){
-
-                         showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              content: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text("Categoria editada correctamente ",textAlign: TextAlign.center,),
-                                  Divider(
-                                    color: Colors.white,
-                                  ),
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                    size: 50.0,
-                                  )
-                                ],
-                              ),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("Cancelar"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                FlatButton(
-                                  child: Text("Aceptar"),
-                                      onPressed: () {
-                                        editCateg();
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/pages/listCategory', (Route<dynamic> route) => false);
-                                       
-                                      },
-                                    ),
-                                  ],
-                                );
-                              });
-                         /*   */
-                      }else{
-                        print('error al editar producto');
-
-                      }
-                     
-                    },
-                  ) */
+                  ),
                 ],
               ),
             ],

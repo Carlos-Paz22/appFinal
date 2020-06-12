@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:apptienda/pages/listUser.dart';
 import './editdata.dart';
 import 'package:http/http.dart' as http;
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -68,6 +67,7 @@ class _DetailState extends State<Detail> {
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
       ),
       body: new Container(
+        height: 800,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -98,12 +98,6 @@ class _DetailState extends State<Detail> {
                     color: Colors.black,
                     height: 30,
                   ),
-
-                  /* new Padding(padding: const EdgeInsets.only(top: 30.0),),
-                    Text("PASSWORD:",style: TextStyle(color:Colors.lightBlue),),
-                  new Text(widget.list[widget.index]['password'], style: new TextStyle(fontSize: 20.0),),
-                  Divider(), */
-
                   new Padding(
                     padding: const EdgeInsets.only(top: 30.0),
                   ),
@@ -153,134 +147,109 @@ class _DetailState extends State<Detail> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Container(
-                      height: 40.0,
-                      child: RaisedButton(
-                        onPressed: () =>
-                            Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => new EditData(
-                            list: widget.list,
-                            index: widget.index,
-                          ),
-                        )),           
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomLeft,
+                        height: 40.0,
+                        child: RaisedButton(
+                          onPressed: () =>
+                              Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (BuildContext context) => new EditData(
+                              list: widget.list,
+                              index: widget.index,
+                            ),
+                          )),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [Colors.lightBlue, Colors.deepOrange],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 85.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Editar",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.black),
                               ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 85.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Editar",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                     /*  new RaisedButton(
-                        child: new Text("EDITAR"),
-                        color: Colors.blueAccent,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(25.0)),
-                        onPressed: () =>
-                            Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => new EditData(
-                            list: widget.list,
-                            index: widget.index,
-                          ),
-                        )),
-                      ), */
-                      VerticalDivider(),
-                       Container(
-                      height: 40.0,
-                      child: RaisedButton(
-                        onPressed:() => confirm(),         
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomLeft,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 85.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Eliminar",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    /*   new RaisedButton(
-                        child: new Text("ELIMINAR"),
-                        color: Colors.redAccent,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () => confirm(),
-                      ), */
                       VerticalDivider(),
                       Container(
-                      height: 40.0,
-                      child: RaisedButton(
-                        onPressed:() {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/pages/listUser',
-                              (Route<dynamic> route) => false);
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.lightBlue, Colors.deepOrange],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomLeft,
+                        height: 40.0,
+                        child: RaisedButton(
+                          onPressed: () => confirm(),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [Colors.lightBlue, Colors.deepOrange],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 85.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Eliminar",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.black),
                               ),
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                maxWidth: 85.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Salir",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  /*     new RaisedButton(
-                        child: new Text("Salir"),
-                        color: Colors.yellow,
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () {
-                          /* Navigator.pushReplacementNamed(
-                              context, '/pages/listUser'); */
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/pages/listUser',
-                              (Route<dynamic> route) => false);
-                        },
-                      ), */
+                      VerticalDivider(),
+                      Container(
+                        height: 40.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/pages/listUser',
+                                (Route<dynamic> route) => false);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [Colors.lightBlue, Colors.deepOrange],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomLeft,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                  maxWidth: 85.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Regresar",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Divider(
+                        color: Colors.white,
+                        height: 50,
+                      ),
                     ],
                   )
                 ],

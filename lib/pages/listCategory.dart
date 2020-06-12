@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
-import 'package:apptienda/pages/dropdownCategory.dart';
 import 'package:apptienda/pages/createCategory.dart';
 import 'package:apptienda/pages/detailCategory.dart';
 import 'package:apptienda/pages/editCategory.dart';
@@ -25,23 +23,24 @@ class _LisCatgState extends State<LisCatg> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new GradientAppBar(
-              gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
-                    leading: Builder(
-    builder: (BuildContext context) {
-      return IconButton(
-        icon: const Icon(Icons.keyboard_backspace,color: Colors.white,),
-
-          onPressed: () {
+        gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.keyboard_backspace,
+                color: Colors.white,
+              ),
+              onPressed: () {
                 Navigator.pushReplacementNamed(context, '/pages/viewProduct');
-                // Navigator.of(context).pushNamedAndRemoveUntil('/pages/view_product', (Route<dynamic> route) => false);
               },
-        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-      );
-    },
-  ),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
         title: new Text("Listado de Categorias"),
         actions: <Widget>[
-           IconButton(
+          IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () => showDialog(
                 barrierDismissible: false,
@@ -53,78 +52,23 @@ class _LisCatgState extends State<LisCatg> {
         ],
       ),
       floatingActionButton: new FloatingActionButton(
-        child: new Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-        onPressed:(){
-           /* Navigator.of(context).pushNamed('/pages/createProduct'); */
+          child: new Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          onPressed: () {
             Navigator.push(
-              context, 
+              context,
               MaterialPageRoute(builder: (context) => AddCategory()),
-            ); 
-           /* Navigator.of(context).pushNamedAndRemoveUntil('/pages/createProduct', (Route<dynamic> route) => false);  */
-        }
-        
-         /* () => Navigator.of(context).push(new MaterialPageRoute(
-          builder: (BuildContext context) => new AddProduct(),
-
-        )),  */
-      ),
+            );
+          }),
       body: new RefreshIndicator(
-              child: Container(
+        child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [Colors.white, Colors.grey])),
-          child: new FutureBuilder<List>(
-            future: getCateg(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) print(snapshot.error);
-              return snapshot.hasData
-                  ? new ItemList(
-                      list: snapshot.data,
-                    )
-                  : new Center(
-                      child: new CircularProgressIndicator(),
-                    );
-                    
-            },
-           
-          ),
-        ),
-         onRefresh: _handleRefresh,
-               ),
-             );
-           }
-      /* floatingActionButton: new FloatingActionButton.extended(
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
-          //Crear categorias con el boron
-          // builder: (BuildContext context) => new AddCatg(),
-          builder: (BuildContext context) => new LandingScreen(),
-        )),
-        icon: new Icon(Icons.add),
-        label: const Text("Agregar categorias"),
-        backgroundColor: Colors.green,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      bottomNavigationBar: BottomAppBar(
-        clipBehavior: Clip.antiAlias,
-        child: Material(
-            child: SizedBox(
-              width: double.infinity,
-              height: 40.0,
-            ),
-            color: Colors.black),
-      ),
-      body: RefreshIndicator(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.white, Colors.grey])),
           child: new FutureBuilder<List>(
             future: getCateg(),
             builder: (context, snapshot) {
@@ -142,20 +86,20 @@ class _LisCatgState extends State<LisCatg> {
         onRefresh: _handleRefresh,
       ),
     );
-  } */
-       Future<Null> _handleRefresh() async {
+  }
+
+  Future<Null> _handleRefresh() async {
     await new Future.delayed(new Duration(seconds: 1));
 
     setState(() {
-       LisCatg();
+      LisCatg();
       AddCategory();
       DetailCategory();
       EditCateg();
-
     });
 
     return null;
-  }   
+  }
 }
 
 class ItemList extends StatelessWidget {
@@ -173,13 +117,12 @@ class ItemList extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               new MaterialPageRoute(
                   builder: (BuildContext context) => new DetailCategory(
-                        //Detalles de las categorias
                         listCatg: list,
                         indexCatg: i,
                       )),
             ),
             child: new Card(
-               shape: RoundedRectangleBorder(
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19.0),
                 side: new BorderSide(color: Colors.blueAccent, width: 2.0),
               ),
@@ -215,7 +158,7 @@ class AboutWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text("¿Desea salir de la sesion? "),
-             Divider(
+            Divider(
               color: Colors.white,
             ),
             Icon(
@@ -235,8 +178,8 @@ class AboutWidget extends StatelessWidget {
           FlatButton(
             child: Text("Aceptar"),
             onPressed: () {
-              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/pages/login', (Route<dynamic> route) => false);
             },
           )
         ],

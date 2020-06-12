@@ -2,13 +2,13 @@ class Datos {
   final String id;
   final String nombre, precio, descripcion, imgen;
 
-  Datos(
-      {this.id,
-      this.nombre,
-      this.precio,
-      this.descripcion,
-      this.imgen,
-      });
+  Datos({
+    this.id,
+    this.nombre,
+    this.precio,
+    this.descripcion,
+    this.imgen,
+  });
   factory Datos.fromJson(Map<String, dynamic> jsonData) {
     return Datos(
       id: jsonData['id'],

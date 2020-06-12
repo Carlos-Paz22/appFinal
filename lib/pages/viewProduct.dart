@@ -1,6 +1,4 @@
-import 'package:apptienda/allproduct/ListProduct.dart';
-import 'package:apptienda/pages/listCategory.dart';
-import 'package:apptienda/pages/listProduct.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -54,18 +52,13 @@ class ViewProduct extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () {
-                   /*  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new LisCatg(),
-                    )); */
+                  
                      Navigator.of(context).pushNamedAndRemoveUntil('/pages/listCategory', (Route<dynamic> route) => false);
                   },
                 ),
               ),
             ),
-           /*  Divider(
-              color: Colors.black,
-              height: 15,
-            ), */
+        
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19.0),
@@ -89,18 +82,14 @@ class ViewProduct extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () {
-                   /*  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new Listado(),
-                    )); */
+                 
                      Navigator.of(context).pushNamedAndRemoveUntil('/allproduct/ListProduct', (Route<dynamic> route) => false);
-                    /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+                    
                   },
                 ),
               ),
             ),
-           /*  Divider(
-              color: Colors.black,
-            ), */
+         
           ],
         ),
       ),

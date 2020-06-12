@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'detailUser.dart';
 
-
 class User extends StatelessWidget {
 
   

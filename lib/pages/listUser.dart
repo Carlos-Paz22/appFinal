@@ -30,6 +30,19 @@ class _ListUserState extends State<ListUser> {
     return new Scaffold(
       appBar: new GradientAppBar(
         gradient: LinearGradient(colors: [Colors.cyan, Colors.indigo]),
+         leading: Builder(
+    builder: (BuildContext context) {
+      return IconButton(
+        icon: const Icon(Icons.keyboard_backspace,color: Colors.white,),
+
+          onPressed: () {
+                Navigator.pushReplacementNamed(context, '/pageAdmin');
+                
+              },
+        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      );
+    },
+  ),
         title: new Text("Listado Usuarios"),
            actions: <Widget>[
           IconButton(
@@ -42,21 +55,9 @@ class _ListUserState extends State<ListUser> {
                 }),
           ),
         ],
-       /*  actions: <Widget>[
-          IconButton(icon:Icon(Icons.search), onPressed:(){})
-
-        ], */
+    
       ),
-     /*  floatingActionButton: new FloatingActionButton(
-        child: new Icon(
-          Icons.add ,
-          color: Colors.black,
-           ),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(
-             builder: (BuildContext context) => new AddData(),
-            )),
-      ),  */
-      
+   
 
       body: new RefreshIndicator(
               child: Container(
@@ -180,7 +181,7 @@ class AboutWidget extends StatelessWidget {
           FlatButton(
             child: Text("Aceptar"),
             onPressed: () {
-              /* Navigator.pushReplacementNamed(context, '/pages/login'); */
+            
               Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
             },
           )

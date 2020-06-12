@@ -1,6 +1,4 @@
-import 'package:apptienda/pages/listCategory.dart';
 import 'package:apptienda/pages/listUser.dart';
-import 'package:apptienda/pages/listProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -54,18 +52,13 @@ class Admin extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new ListUser(),
-                    ));
-                  },
+                      Navigator.of(context).pushNamedAndRemoveUntil('/pages/listUser', (Route<dynamic> route) => false);
+                  }
                 ),
               ),
             ),
-           /*  Divider(
-              color: Colors.black,
-              height: 15,
-            ), */
-            Card(
+
+            /* Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19.0),
                 side: new BorderSide(color: Colors.blueAccent, width: 2.0),
@@ -91,7 +84,7 @@ class Admin extends StatelessWidget {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new ListProduct(),
                     ));
-                    /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+                   
                   },
                 ),
               ),
@@ -122,13 +115,10 @@ class Admin extends StatelessWidget {
                     Navigator.of(context).push(new MaterialPageRoute(
                       builder: (BuildContext context) => new LisCatg(),
                     ));
-                    /*  Navigator.pushReplacementNamed(context, '/pages/listUser'); */
+                   
                   },
                 ),
               ),
-            ),
-           /*  Divider(
-              color: Colors.black,
             ), */
           ],
         ),
@@ -168,7 +158,8 @@ class AboutWidget extends StatelessWidget {
             child: Text("Aceptar"),
             onPressed: () {
               /* Navigator.pushReplacementNamed(context, '/pages/login'); */
-              Navigator.of(context).pushNamedAndRemoveUntil('/pages/login', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/pages/login', (Route<dynamic> route) => false);
             },
           )
         ],
