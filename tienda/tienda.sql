@@ -68,16 +68,14 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `direccion` text NOT NULL,
   `estado` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla tienda.usuarios: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.usuarios: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `username`, `password`, `telefono`, `ciudad`, `direccion`, `estado`) VALUES
 	(1, 'carlos', '1234', '3122302446', 'San Francisco', 'Los pinos', 'admin'),
-	(2, 'carlos', 'carlos', '12345', 'XD', 'Gg', 'ventas'),
-	(3, 'Franklin', 'xd', '323', 'Mocoa', 'La loma', 'ventas'),
-	(4, 'Jugoxd', 'gay', '332', 'das', 'aaa', 'ventas'),
-	(5, 'fsd', 'dsf', 'fds', 'fds', 'fds', 'ventas');
+	(2, 'duvan', 'duvan22', '3134534533', 'San Francisco', 'Almirante', 'ventas'),
+	(3, 'camilo', 'ender03', '3156738373', 'Mocoa', 'La loma', 'ventas');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
