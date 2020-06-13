@@ -1,9 +1,7 @@
 <?php
     require_once "conexion.php";
 	$conexion=conexion();
-   
-/* 
-    $registercategoria = $_POST['nombre']; */
+
     $categoria = $_POST['nombre'];
 
     $validarcategorias = $conexion -> query("SELECT * FROM categoria WHERE nombre = '$categoria' ");

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:apptienda/allproduct/Clase.dart';
-import 'package:apptienda/allproduct/Edicion.dart';
+import 'package:apptienda/detailsProduct/datosJson.dart';
+import 'package:apptienda/detailsProduct/viewListProduct..dart';
 import 'package:apptienda/pages/createProduct.dart';
 import 'package:apptienda/pages/detailproduct.dart';
 import 'package:apptienda/pages/editProduct.dart';

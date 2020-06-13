@@ -139,8 +139,9 @@ class _AddProductState extends State<AddProduct> {
                                 if (value.isEmpty)
                                   return "Ingrese una categoria";
                               },
+                                 keyboardType: TextInputType.number,
                               decoration: new InputDecoration(
-                                hintText: "Categoria",
+                                hintText: "Ingrese una categoria (1-10)",
                                 labelText: "Categoria",
                               ),
                             ),
@@ -221,7 +222,7 @@ class _AddProductState extends State<AddProduct> {
 
                                               Navigator.of(context)
                                                   .pushNamedAndRemoveUntil(
-                                                      '/allproduct/ListProduct',
+                                                      '/detailsProduct/ListProduct',
                                                       (Route<dynamic> route) =>
                                                           false);
                                             },
@@ -264,7 +265,7 @@ class _AddProductState extends State<AddProduct> {
                             child: RaisedButton(
                               onPressed: () {
                                 Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/allproduct/ListProduct',
+                                    '/detailsProduct/ListProduct',
                                     (Route<dynamic> route) => false);
                               },
                               shape: RoundedRectangleBorder(

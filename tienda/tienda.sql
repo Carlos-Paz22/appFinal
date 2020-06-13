@@ -21,17 +21,18 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla tienda.categoria: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.categoria: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
-	(1, 'Celulares'),
+	(1, 'Celulares1'),
 	(2, 'Computadores'),
 	(3, 'Juegos'),
 	(4, 'Mascotas'),
 	(5, 'Inmuebles'),
-	(6, 'Instrumentos Musicales');
+	(6, 'Instrumentos Musicales'),
+	(7, 'Celular');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 -- Volcando estructura para tabla tienda.productos
@@ -45,15 +46,16 @@ CREATE TABLE IF NOT EXISTS `productos` (
   PRIMARY KEY (`id`),
   KEY `FK_productos_categoria` (`id_catg_producto`),
   CONSTRAINT `FK_productos_categoria` FOREIGN KEY (`id_catg_producto`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla tienda.productos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.productos: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `descripcion`, `img`, `id_catg_producto`) VALUES
 	(1, 'Xiaomi Pocophone F2 Pro', '1800000', 'Es un nuevo smartphone de la serie POCO de Xiaomi.', 'celular.jpg', 1),
 	(2, 'Portatil Acer 53lp Core I5 8va 1tb+128gb Ssd Gtx 1050 4gb', '3171900', 'Explora y disfruta un nuevo nivel de Gaming mas inmersivo con la pantalla Full HD y la potente tecnologia del Nitro 5.', 'scaled_image_picker8830482214009219269.jpg', 2),
 	(3, 'Piano Teclado Electronico Yamaha Dgx-660b + Adaptador Pa150', '3560000', 'El nuevo Yamaha DGX-660 es el ultimo piano digital de conjunto que presenta una variedad de caracteristicas interactivas que hacen mas divertida la musica.', 'scaled_image_picker1681425350289611504.jpg', 6),
-	(4, 'Perro labrador', '850000', 'Hermoso perro cachorro, te brindara gran amor  y ademas es muy jugueton.', 'scaled_image_picker6746124552696750041.jpg', 4);
+	(4, 'Perro labrador', '850000', 'Hermoso perro cachorro, te brindara gran amor  y ademas es muy jugueton.', 'scaled_image_picker6746124552696750041.jpg', 4),
+	(5, 'Fifa 2020', '160000', 'Juego multijugador y online para que te diviertas con tus amigos', 'scaled_image_picker4032005219773331084.jpg', 3);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla tienda.usuarios

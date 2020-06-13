@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:apptienda/allproduct/Clase.dart';
+import 'package:apptienda/detailsProduct/datosJson.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class SecondScreen extends StatefulWidget {
@@ -77,7 +77,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       child: RaisedButton(
                         onPressed: () {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/allproduct/ListProduct',
+                              '/detailsProduct/ListProduct',
                               (Route<dynamic> route) => false);
                         },
                         shape: RoundedRectangleBorder(

@@ -68,9 +68,10 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/pageAdmin', (Route<dynamic> route) => false);
       } else if (datauser[0]['estado'] == 'ventas') {
+        
       
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/pages/viewProduct', (Route<dynamic> route) => false);
+            '/pages/viewProduct', (Route<dynamic> route) => false); 
       }
 
       setState(() {

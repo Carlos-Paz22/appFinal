@@ -2,11 +2,10 @@
       require_once "conexion.php";
       $conexion=conexion();
 
-   /*  $deletecategoria = $_POST['id_categoria']; */
-   $id=$_POST['id'];
+      $id=$_POST['id'];
 
-    $categoria_en_uso = $conexion -> query("SELECT * FROM productos WHERE id = '$id'");
-    $resultado = array();
+      $categoria_en_uso = $conexion -> query("SELECT * FROM productos WHERE id = '$id'");
+      $resultado = array();
     while($extraerdatos = $categoria_en_uso -> fetch_assoc()){
         $resultado[] = $extraerdatos;
     }

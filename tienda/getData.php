@@ -2,7 +2,6 @@
 require_once "conexion.php";
 $conexion=conexion();
 
-
 $queryResult=$conexion->query("SELECT * FROM usuarios");
 
 $result=array();

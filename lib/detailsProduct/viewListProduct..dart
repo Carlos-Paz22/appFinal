@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:apptienda/allproduct/Clase.dart';
-import 'package:apptienda/allproduct/detalles.dart';
+import 'package:apptienda/detailsProduct/datosJson.dart';
+import 'package:apptienda/detailsProduct/details.dart';
 
 class CustomListView extends StatelessWidget {
   final List<Datos> dataproductos;
@@ -42,10 +42,7 @@ class CustomListView extends StatelessWidget {
                     Text(
                       "  Nombre:",style: TextStyle(color: Colors.blueAccent),
                     ),
-                   /*  Divider(
-                      color: Colors.white,
-                      height: 0,
-                    ),  */
+                 
                     Text("  "),
                     Padding(
                         child: Text(

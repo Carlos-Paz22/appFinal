@@ -1,3 +1,5 @@
+import 'package:apptienda/pages/listCategory.dart';
+import 'package:apptienda/pages/listProduct.dart';
 import 'package:apptienda/pages/listUser.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -58,12 +60,12 @@ class Admin extends StatelessWidget {
               ),
             ),
 
-            /* Card(
+             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19.0),
                 side: new BorderSide(color: Colors.blueAccent, width: 2.0),
               ),
-              child: Card(
+              /* child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(19.0),
                   side: new BorderSide(color: Colors.blueAccent, width: 2.0),
@@ -118,8 +120,8 @@ class Admin extends StatelessWidget {
                    
                   },
                 ),
-              ),
-            ), */
+              ), */
+            ), 
           ],
         ),
       ),

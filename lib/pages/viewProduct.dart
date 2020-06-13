@@ -83,7 +83,7 @@ class ViewProduct extends StatelessWidget {
                   ),
                   onTap: () {
                  
-                     Navigator.of(context).pushNamedAndRemoveUntil('/allproduct/ListProduct', (Route<dynamic> route) => false);
+                     Navigator.of(context).pushNamedAndRemoveUntil('/detailsProduct/ListProduct', (Route<dynamic> route) => false);
                     
                   },
                 ),
