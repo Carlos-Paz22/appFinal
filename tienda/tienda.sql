@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla tienda.categoria: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.categoria: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
 	(1, 'Celulares1'),
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   CONSTRAINT `FK_productos_categoria` FOREIGN KEY (`id_catg_producto`) REFERENCES `categoria` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla tienda.productos: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.productos: ~5 rows (aproximadamente)
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `descripcion`, `img`, `id_catg_producto`) VALUES
 	(1, 'Xiaomi Pocophone F2 Pro', '1800000', 'Es un nuevo smartphone de la serie POCO de Xiaomi.', 'celular.jpg', 1),
@@ -75,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 INSERT INTO `usuarios` (`id`, `username`, `password`, `telefono`, `ciudad`, `direccion`, `estado`) VALUES
 	(1, 'carlos', '1234', '3122302446', 'San Francisco', 'Los pinos', 'admin'),
 	(2, 'duvan', 'duvan22', '3134534533', 'San Francisco', 'Almirante', 'ventas'),
-	(3, 'camilo', 'ender03', '3156738373', 'Mocoa', 'La loma', 'ventas');
+	(3, 'camilo', 'ender03', '3156738373', 'Mocoa', 'La loma', 'ventas'),
+	(4, 'catalina', 'cata33', '3277783283', 'Mocoa', 'Los sauces', 'ventas');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
